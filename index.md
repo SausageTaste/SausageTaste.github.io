@@ -1,18 +1,33 @@
 ---
-title: "Jekyll Github 블로그에 MathJax로 수학식 표시하기"
+title: "Github Pages 테스트 페이지"
 tags:
   - Blog
   - MathJax
   - Jekyll
   - LaTeX
+  - Test
 use_math: true
 ---
 
-## Welcome to GitHub Pages v5
+## Welcome to GitHub Pages
 
 You can use the [editor on GitHub](https://github.com/SausageTaste/SausageTaste.github.io/edit/master/index.md) to maintain and preview the content for your website in Markdown files.
 
 Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+
+### Math
+
+$$
+K(a,b) = \int \mathcal{D}x(t) \exp(2\pi i S[x]/\hbar)
+$$
+
+This formula $f(x) = x^2$ is an example.
+
+$$
+\lim_{x\to 0}{\frac{e^x-1}{2x}}
+\overset{\left[\frac{0}{0}\right]}{\underset{\mathrm{H}}{=}}
+\lim_{x\to 0}{\frac{e^x}{2}}={\frac{1}{2}}
+$$
 
 ### Markdown
 
@@ -45,17 +60,3 @@ Your Pages site will use the layout and styles from the Jekyll theme you have se
 ### Support or Contact
 
 Having trouble with Pages? Check out our [documentation](https://help.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
-
-### Math
-
-$$
-K(a,b) = \int \mathcal{D}x(t) \exp(2\pi i S[x]/\hbar)
-$$
-
-This formula $f(x) = x^2$ is an example.
-
-$$
-\lim_{x\to 0}{\frac{e^x-1}{2x}}
-\overset{\left[\frac{0}{0}\right]}{\underset{\mathrm{H}}{=}}
-\lim_{x\to 0}{\frac{e^x}{2}}={\frac{1}{2}}
-$$
