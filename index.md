@@ -1,3 +1,12 @@
+---
+layout: post
+mathjax: true
+comments: true
+title:  "Adding MathJax to a GitHub Pages Jekyll Blog"
+date:   2016-08-21 23:41:54 +0000
+categories: github jekyll
+---
+
 ## Welcome to GitHub Pages
 
 You can use the [editor on GitHub](https://github.com/SausageTaste/SausageTaste.github.io/edit/master/index.md) to maintain and preview the content for your website in Markdown files.
@@ -35,3 +44,13 @@ Your Pages site will use the layout and styles from the Jekyll theme you have se
 ### Support or Contact
 
 Having trouble with Pages? Check out our [documentation](https://help.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
+
+### Math
+
+This formula $f(x) = x^2$ is an example.
+
+$$
+\lim_{x\to 0}{\frac{e^x-1}{2x}}
+\overset{\left[\frac{0}{0}\right]}{\underset{\mathrm{H}}{=}}
+\lim_{x\to 0}{\frac{e^x}{2}}={\frac{1}{2}}
+$$
