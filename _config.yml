@@ -1,4 +1,9 @@
 theme: jekyll-theme-midnight
 title: Nice to meet you!
 description: What should I do here...
+
 markdown: kramdown
+highlighter: rouge
+lsi: false
+excerpt_separator: "\n\n"
+incremental: false

@@ -1,8 +1,14 @@
 ---
+title: "Jekyll Github 블로그에 MathJax로 수학식 표시하기"
+tags:
+  - Blog
+  - MathJax
+  - Jekyll
+  - LaTeX
 use_math: true
 ---
 
-## Welcome to GitHub Pages v3
+## Welcome to GitHub Pages v4
 
 You can use the [editor on GitHub](https://github.com/SausageTaste/SausageTaste.github.io/edit/master/index.md) to maintain and preview the content for your website in Markdown files.
 
@@ -44,4 +50,12 @@ Having trouble with Pages? Check out our [documentation](https://help.github.com
 
 $$
 K(a,b) = \int \mathcal{D}x(t) \exp(2\pi i S[x]/\hbar)
+$$
+
+This formula $f(x) = x^2$ is an example.
+
+$$
+\lim_{x\to 0}{\frac{e^x-1}{2x}}
+\overset{\left[\frac{0}{0}\right]}{\underset{\mathrm{H}}{=}}
+\lim_{x\to 0}{\frac{e^x}{2}}={\frac{1}{2}}
 $$
