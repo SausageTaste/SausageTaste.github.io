@@ -1,3 +1,14 @@
+---
+title: "Jekyll Github 블로그에 MathJax로 수학식 표시하기"
+tags:
+  - Blog
+  - MathJax
+  - Jekyll
+  - LaTeX
+use_math: true
+---
+
+
 ## Welcome to GitHub Pages
 
 You can use the [editor on GitHub](https://github.com/SausageTaste/SausageTaste.github.io/edit/master/index.md) to maintain and preview the content for your website in Markdown files.

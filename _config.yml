@@ -2,5 +2,9 @@ theme: jekyll-theme-midnight
 title: Nice to meet you!
 description: What should I do here...
 
-layout: post
-mathjax: true
+# Conversion
+markdown: kramdown
+highlighter: rouge
+lsi: false
+excerpt_separator: "\n\n"
+incremental: false
