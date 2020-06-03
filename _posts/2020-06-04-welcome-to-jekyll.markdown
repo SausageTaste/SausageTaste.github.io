@@ -3,7 +3,29 @@ layout: post
 title:  "안녕하세요"
 date:   2020-06-04 00:01:55 +0900
 categories: jekyll update
+use_math: true
 ---
+
+### Math
+
+ma-th
+K(a,b) = \int_a^b \mathcal{D}x(t) \exp(2\pi i S[x] / \hbar)
+ma-th
+
+This formula $f(x) = x^2$ is an example.
+
+ma-th
+\lim_{x\to 0}{\frac{e^x-1}{2x}}
+\overset{\left[\frac{0}{0}\right]}{\underset{\mathrm{H}}{=}}
+\lim_{x\to 0}{\frac{e^x}{2}}={\frac{1}{2}} = \lim_{x\to 0}{\frac{e^x}{2}} = \lim_{x\to 0}{\frac{e^x}{2}} = \lim_{x\to 0}{\frac{e^x}{2}} = \lim_{x\to 0}{\frac{e^x}{2}}
+ma-th
+
+ma-th
+  \lim_{x\to 0}{\frac{e^x-1}{2x}}
+\overset{\left[\frac{0}{0}\right]}{\underset{\mathrm{H}}{=}}
+\lim_{x\to 0}{\frac{e^x}{2}}={\frac{1}{2}} = \lim_{x\to 0}{\frac{e^x}{2}} = \lim_{x\to 0}{\frac{e^x}{2}} = \lim_{x\to 0}{\frac{e^x}{2}} = \lim_{x\to 0}{\frac{e^x}{2}}
+ma-th
+
 You’ll find this post in your `_posts` directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different ways, but the most common way is to run `jekyll serve`, which launches a web server and auto-regenerates your site when a file is updated.
 
 Jekyll requires blog post files to be named according to the following format:
