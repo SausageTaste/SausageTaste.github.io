@@ -13,7 +13,11 @@
       </div>
     </main>
 
-    {%- include disqus_comments.html -%}
+    {% if page.comments %}
+      {%- include disqus_comments.html -%}
+      <script id="dsq-count-scr" src="//EXAMPLE.disqus.com/count.js" async></script>
+    {% endif %}
+
     {%- include footer.html -%}
 
   </body>
