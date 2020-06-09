@@ -24,8 +24,15 @@ description: >- # this means to ignore newlines until "baseurl:"
   C++와 OpenGL로 게임엔진을 개발하고 있으며 취미로 그림을 그리고 대학에서 경제학을 전공하고 있습니다.
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "" # the base hostname & protocol for your site, e.g. http://example.com
-twitter_username: woos8899
-github_username:  SausageTaste
+
+author:
+  name: Sungmin Woo
+  email: woos8899@gmail.com
+
+minima:
+  social_links:
+    twitter: woos8899
+    github: SausageTaste
 
 # Build settings
 theme: minima
