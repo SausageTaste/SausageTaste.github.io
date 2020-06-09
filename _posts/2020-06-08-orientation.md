@@ -1,7 +1,7 @@
 ---
 layout: post
-title:  "소개"
-date:   2020-06-08 00:01:55 +0900
+title:  "소개 (work in progress)"
+date:   2020-06-09 00:01:55 +0900
 categories: jekyll update
 comments: true
 ---
