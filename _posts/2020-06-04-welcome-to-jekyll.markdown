@@ -1,9 +1,10 @@
 ---
 layout: post
-title:  "안녕하세요"
+title:  "Test Post"
 date:   2020-06-04 00:01:55 +0900
 categories: jekyll update
 use_math: true
+comments: true
 ---
 
 ### Math
