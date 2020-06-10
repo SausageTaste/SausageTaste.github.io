@@ -37,6 +37,8 @@ minima:
 disqus:
   shortname: sausagetaste
 
+google_analytics: UA-169002080-1
+
 # Build settings
 theme: minima
 markdown: kramdown
