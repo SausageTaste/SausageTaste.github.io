@@ -1,10 +1,9 @@
 ---
 layout: post
 title:  "소개 (work in progress)"
-date:   2020-06-09 00:01:55 +0900
-categories: jekyll update
 comments: true
 ---
+
 
 ## 게임엔진
 
