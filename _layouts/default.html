@@ -9,14 +9,7 @@
 
     <main class="page-content" aria-label="Content">
       <div class="wrapper">
-
         {{ content }}
-
-        {% if page.comments %}
-          {%- include disqus_comments.html -%}
-          <script id="dsq-count-scr" src="//sausagetaste.disqus.com/count.js" async></script>
-        {% endif %}
-        
       </div>
     </main>
 

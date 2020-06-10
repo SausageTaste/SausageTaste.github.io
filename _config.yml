@@ -34,6 +34,9 @@ minima:
     twitter: woos8899
     github: SausageTaste
 
+disqus:
+  shortname: sausagetaste
+
 # Build settings
 theme: minima
 markdown: kramdown
