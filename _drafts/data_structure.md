@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "컴퓨터에서 데이터의 표현"
+title:  "컴퓨터에서의 데이터 표현"
 comments: true
 use_math: true
 ---
