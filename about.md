@@ -9,7 +9,7 @@ permalink: /about/
 My name is ***Sungmin Woo***.  
 I live in Seoul, South Korea.  
 I'm a student in Dongguk university.  
-woos8899@gmail.com
+<woos8899@gmail.com>
 
 ## Languages
 
