@@ -86,6 +86,7 @@ Nvidia가 홍보하는 RTX의 주요 개선 분야는 다음과 같습니다.
 건물, 풀, 총, 하늘, 구름은 일반적으로 그린 다음, 바닥에 물 웅덩이에서만 레이 트레이싱을 하는 식으로요.
 
 ![eevee_vs_cycle](/assets/images/graphics_01/eevee_vs_cycle.jpg)
+<!-- 배틀필드5의 RTX on/off 비교 사진으로 교체 -->
 
 레스터라이저도 엄청나게 발전했습니다.
 위 이미지는 블렌더의 Eevee와 Cycle 렌더러로 각각 렌더링한 것입니다.
