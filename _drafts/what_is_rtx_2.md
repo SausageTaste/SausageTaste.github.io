@@ -8,6 +8,8 @@ use_math: true
 *이미지를 클릭하시면 이미지 출처 페이지로 이동합니다. 클릭되지 않는 이미지의 저작권은 제게 있습니다.*
 *Click image to go to the page where I found it. Non clickable images are created by me.*
 
+<br>
+
 저번 글에서 설명했듯, 레이트레이싱은 굉장히 오래 걸리는 작업입니다.
 RTX 2060을 장착한 제 컴퓨터와 Blender를 사용해 레이트레이싱 렌더링을 하면 단순한 장면에서도 몇 초가 걸립니다.
 게임에서 60 FPS를 달성하려면 $\frac{1}{60} = 0.01\dot{6}$초 안에 사진 한 장을 만들어 내야만 하는데요.
@@ -28,10 +30,86 @@ RTX 2060을 장착한 제 컴퓨터와 Blender를 사용해 레이트레이싱 �
 
 [![hybrid_rendering_pipeline](/assets/images/graphics_01/hybrid_rendering_pipeline.png)](https://media.contentapi.ea.com/content/dam/ea/seed/presentations/pica-pica-and-nv-turing-release.pdf)
 
+그림을 보시면 **raster**와 **compute**라는 단어가 보이는데요.
+이것이 바로 전통적인 렌더링 방식입니다.
+보통은 **레스터라이저**라고 부릅니다.
+이후로 전통적 렌더링 방식을 레스터라이저라고 부르겠습니다.
+
+각 이미지 아래에 전통적 렌더링만 사용하느냐, 혹은 레이트레이싱을 사용할 수도 있느냐가 표기되어 있습니다.
+보시면 반사(reflection)나 글로벌 일루미네이션(global illumination) 같은 것들은 레스터라이저로 구현할 수도 있고 레이트레이싱으로 구현할 수도 있네요.
+
+잘 생각해 보면, 그림자라던가 표면 반사라던가 이런 것들은 레이트레이싱 없이도 구현이 되긴 됩니다.
+
+[![g_buffer_images](https://steamuserimages-a.akamaihd.net/ugc/1680366796911924639/4E8B86A4B7258A9243D8BA2CCAC92C0FCC7263BB/?imw=1024&imh=576&ima=fit&impolicy=Letterbox&imcolor=%23000000&letterbox=true)](https://steamcommunity.com/sharedfiles/filedetails/?id=2276532178)
+
+하지만 레이트레이싱을 사용하면 현실과 정말 똑같은 완벽한 반사 효과를 구현할 수 있지요.
+그렇다면 레스터라이저의 불완전한 점이 어떤 것이 있는지 좀 자세히 알아볼까요?
 
 
+# 레스터라이저
 
+## 화면 공간
 
+### 기본 개념
+
+아까 그림에서 **deferred shading**이라는 게 있었죠.
+이것이 핵심입니다.
+
+[![g_buffer_images](https://learnopengl.com/img/advanced-lighting/deferred_g_buffer.png)](https://learnopengl.com/Advanced-Lighting/Deferred-Shading)
+
+Deferred rendering을 수행하면 이렇게 생긴 이미지들을 생성해 냅니다.
+보시면 albedo는 마치 물체의 모든 부분이 빛을 고르게 받은 모습을 하고 있습니다.
+반면 Position, normals, specular은 뭐라 형언할 수 없는 괴상한 색깔을 띠고 있네요.
+이 색깔들의 의미는 사실 3차원 벡터 (x, y, z)를 그대로 (r, g, b)인 것처럼 해석하여 그림으로 만든 결과입니다.
+나중에 최종 렌더링 결과물을 만들 때, 각 물체의 정보를 얻는 데 사용되지요.
+
+여기서 중요한 것은 position입니다.
+잘 생각해 보면, position 이미지를 잘 활용하면 카메라에 보이는 공간의 모양을 알 수 있습니다.
+모양을 알면 뭘 할 수 있습니까?
+맞습니다.
+광선을 발사해볼 수 있지요!
+
+공간에 100개 정도의 삼각형이 있을 때 레이트레이싱을 하면 금방 끝납니다.
+하지만 수억 개의 삼각형에다 광선을 쏘면 죽도록 오래 걸리지요.
+
+그런데 100개의 삼각형이든 수억 개의 삼각형이든 관계 없이,
+일단 deferred rendering을 수행하여 position 이미지로 만들어버린다면?
+광선을 쏴보는 데 걸리는 시간은 거의 차이가 나지 않습니다.
+position 이미지는 어쨌든 한 장의 이미지일 뿐이니까요.
+
+여기서 우리는 중요한 결론을 얻을 수 있습니다.
+삼각형 무더기에 광선을 쏘는 대신 position 이미지에 광선을 쏘자!
+그렇게 하면 물체가 늘어나도 광선 충돌 검사 시간은 크게 늘어나지 않는다!
+
+이것이 화면 공간(screen space) 테크닉의 기본 개념입니다.
+화면 공간 반사(screen space reflection), 화면 공간 앰비언트 오클루전(SSAO, screen space ambient occlusion) 같은 용어들을 들어보셨는지요.
+화면 공간 반사는 position 이미지에다 광선을 발사하여 반사상의 위치와 색깔을 알아내는 기법입니다.
+화면 공간 앰비언트 오클루전은 position 이미지에서 광선을 발사하여 근처에 물체가 가까이 붙어 있나 확인, 이에 따라 구석진 곳을 어둡게 만드는 기술입니다.
+
+저 시퍼러둥둥한 이미지에 광선을 발사한다는 건 어찌 보면 참 해괴한 소리입니다.
+추후 기회가 된다면 deferred rendering에 대한 글을 쓸 때 제대로 알려드릴까 합니다.
+혹시 따로 알아보고 싶으신 분들은 **ray march**로 검색해 보시기 바랍니다.
+여기서는 기본적인 개념만 알아두고 넘어갑시다.
+
+* 삼각형 무더기에 광선을 발사하면 너무 오래 걸린다.
+* 카메라에 보이는 공간의 형태를 이미지로 표현할 수 있다.
+* 이 이미지 안에서 광선을 발사하면 시간이 훨씬 단축된다.
+* 덕분에 레이트레이싱으로만 가능했던 시각 효과를 훨씬 효율적으로 수행할 수 있게 된다.
+
+### 약점
+
+하지만 그럼에도 우리는 레이트레이싱에 열광합니다.
+그 이유는 화면 공간 기법에는 치명적인 약점이 있기 때문이지요.
+
+Deferred rendering은 카메라에 포착된 부분만 이미지로 만들어 냅니다.
+그러므로 카메라 범위 바깥의 공간에 대한 형태나 색깔은 알 수 없습니다.
+그래서 반사되어야 할 물체가 화면 밖에 있다면 그 물체는 올바르게 반사되지 못 합니다.
+
+[![g_buffer_images](https://steamuserimages-a.akamaihd.net/ugc/1680366796911924762/8DE3F1E1EF22531D986C9268BC9429A01A477A73/?imw=1024&imh=576&ima=fit&impolicy=Letterbox&imcolor=%23000000&letterbox=true)](https://steamcommunity.com/sharedfiles/filedetails/?id=2276532204)
+
+아까 위에서 봤던 와치독스 2의 스크린샷과 같은 장소인데 카메라 각도가 달라졌습니다.
+빌딩과 교량이 화면 밖으로 나가버리니 수면 위에도 반사되지 못 한다는 것을 확인할 수 있습니다.
+이것이 매우매우 결정적인 약점입니다.
 
 
 
