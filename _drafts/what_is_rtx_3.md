@@ -158,3 +158,9 @@ Nvidia가 구체적으로 어떻게 구현했는지는 잘 모르겠지만, 분�
 그래서 RT 코어를 도입하여 레이트레이싱 연산을 수행할 코어를 별도로 제공함으로써 이 문제를 해결한 것입니다.
 
 ## Tensor Core
+
+# 참고자료
+
+* [NVIDIA TURING GPU ARCHITECTURE](https://www.nvidia.com/content/dam/en-zz/Solutions/design-visualization/technologies/turing-architecture/NVIDIA-Turing-Architecture-Whitepaper.pdf)
+* [NVidia Turing Architecture Technical Deep-Dive: SM Rework, Big Turing, and INT vs. FP](https://www.gamersnexus.net/guides/3364-nvidia-turing-architecture-technical-deep-dive)
+* [The NVIDIA Turing GPU Architecture Deep Dive: Prelude to GeForce RTX](https://www.anandtech.com/show/13282/nvidia-turing-architecture-deep-dive/5)
