@@ -23,5 +23,6 @@ theme: minima
 markdown: kramdown
 plugins:
   - jekyll-feed
+  - jekyll-sitemap
 
 host: 0.0.0.0
