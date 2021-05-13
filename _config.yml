@@ -25,3 +25,4 @@ plugins:
   - jekyll-feed
 
 host: 0.0.0.0
+github_pages_url: "https://sausagetaste.github.io"
