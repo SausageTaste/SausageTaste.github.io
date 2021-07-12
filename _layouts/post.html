@@ -27,7 +27,7 @@ layout: default
   </header>
 
   <div class="post-content e-content" itemprop="articleBody">
-    {{ content }}
+    {{ content | replace: "\[", "ma-th" | replace: "\]", "ma-th" }}
   </div>
 
   {%- if site.disqus.shortname -%}
