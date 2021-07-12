@@ -169,7 +169,7 @@ gta5는 수면 반사와 옷가게의 거울 반사 등 필수적인 상황에�
 
 먼저 다음 영상을 봐주세요.
 
-<iframe width="256" height="256" src="https://www.youtube.com/embed/ZH6s1hbwoQQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<div style='position:relative; padding-bottom:calc(56.25% + 44px)'><iframe scrolling='no' width='100%' height='100%' style='position:absolute;top:0;left:0;' src="https://www.youtube.com/embed/ZH6s1hbwoQQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
 
 보시면 플레이어가 움직이면 반사상도 함께 따라오는 모습을 볼 수 있을 것입니다.
 큐브맵 반사의 큰 특징이죠.
@@ -309,6 +309,8 @@ $A$ 위치에서 건물의 텍스처 색깔을 가져오면 그것이 바로 반
 화면공간 반사상을 찾기 위해 광선을 쏴보고, 반사상이 화면 바깥에 있으면 큐브맵을 사용하는 것입니다.
 이게 전부입니다.
 간단한 아이디어지만 게임에서 사용되면 완벽에 가까운 반사를 구현할 수 있습니다.
+
+<div style='position:relative; padding-bottom:calc(56.25% + 44px)'><iframe src='https://gfycat.com/ifr/EsteemedConfusedAcornwoodpecker' frameborder='0' scrolling='no' width='100%' height='100%' style='position:absolute;top:0;left:0;' allowfullscreen></iframe></div>
 
 # 요약
 
