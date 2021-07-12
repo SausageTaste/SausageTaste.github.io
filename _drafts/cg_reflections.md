@@ -51,16 +51,75 @@ use_math: true
 
 # 평면 반사 Planar reflection
 
+## 구현
+
+![half-life_planar_reflection_animated](/assets/images/graphics_01/half-life_planar_reflection_animated.gif)
+
 하프라이프 2에 등장하는 물 반사에 사용된 기술입니다.
 기본적인 원리는 다음과 같습니다.
 공간을 일반적인 방식으로 렌더링 하기 전에, 물 위에 반사될 물체들을 한 번, 물 아래 잠겨 있는 물체들을 한 번 따로 렌더링을 합니다.
 그리고 두 개의 이미지를 결합해서 반사와 굴절이 이루어진 화면을 만들어 냅니다.
 
-`물 아래, 물 위 장면이 그려진 화면과 결합된 화면`
+지금부터 자세히 알아봅시다.
+아래 사진은 제가 OpenGL로 만든 게임 엔진을 이용해 만든 자료 화면입니다.
 
-그리고 물이 그려질 위치에 세 가지 화면을 적절하게 섞으면 완성입니다.
-물의 일렁임을 구현하기 위해 DUDV 맵이란 것을 사용하며, 반사상이 더 잘 보일지 굴절상이 더 잘 보일지를 결정하기 위해 [프레넬 효과](https://cutemoomin.tistory.com/entry/%EA%B7%B8%EB%9E%98%ED%94%BD%EC%8A%A4-%EB%B9%9B-%EC%A1%B0%EB%AA%85-%ED%94%84%EB%A0%88%EB%84%AC-%ED%9A%A8%EA%B3%BC#:~:text=%EA%B7%B8%EB%9F%AC%EB%82%98%20%EA%B3%A0%EA%B0%9C%EB%A5%BC%20%EB%93%A4%EC%96%B4%EC%84%9C%20%EC%A7%80%ED%8F%89%EC%84%A0,(Fresnel%20effect)%EB%9D%BC%EA%B3%A0%20%EB%B6%80%EB%A5%B8%EB%8B%A4.)를 적용하는 등 더 많은 처리가 필요합니다.
-그러나 반사 효과에만 집중한다면 그 원리는 상당히 간단합니다.
+![planar_reflection_1_plane.jpg](/assets/images/graphics_01/planar_reflection_1_plane.jpg)
+
+평면 반사라는 이름답게 물은 평면의 형태로 그려집니다.
+화면에 파란색 평면은 삼각형 두 개를 붙여 만든 단순한 사각형입니다.
+그리고 화면 좌측 상단을 보시면 두 개의 그림이 보이죠?
+위에서부터 각각 *굴절상*과 *반사상*입니다.
+굴절상에는 물 아래에 있는 물체만 그려지며, 반사상에는 물 위의 물체만 그려집니다.
+
+![planar_reflection_2_refraction](/assets/images/graphics_01/planar_reflection_2_refraction.jpg)
+
+위 그림은 굴절상 이미지를 그대로 파란색 평면에 씌었을 때의 모습입니다.
+걍 파란 평면은 없앤 것이 아니냐고요?
+아닙니다.
+매의 눈으로 보시면, 원래 파란색이었던 영역은 그렇지 않았던 영역에 비해 좀 더 흐립니다.
+최적화를 위해 굴절상과 반사상의 해상도를 조금 낮췄기 때문이죠.
+디바의 다리를 보면 흰색 선이 있는데, 이곳이 수면 경계선입니다.
+
+![planar_reflection_3_reflection](/assets/images/graphics_01/planar_reflection_3_reflection.jpg)
+
+이것은 반사상을 파란 평면 위에 씌운 모습입니다.
+완벽한 거울처럼 생겼죠?
+지금까지 보여준 세 가지 요소, 파란색 평면, 반사상, 굴절상을 이용하여 아름다운 물을 만들어내 보겠습니다.
+
+![planar_reflection_4_half_blending](/assets/images/graphics_01/planar_reflection_4_half_blending.jpg)
+
+위 그림은 반사상과 굴절상 그림을 50대 50 비율로 섞은 모습입니다.
+벌써 어느 정도 물 같이 보이지요?
+파동이 1도 없는 엄청나게 잔잔한 물 말입니다.
+
+![planar_reflection_5_dudv](/assets/images/graphics_01/planar_reflection_5_dudv.jpg)
+
+일렁이는 효과를 넣었습니다.
+이런 걸 구현할 때는 [DUDV map](http://wiki.polycount.com/wiki/DuDv_map)이라는 걸 사용합니다.
+디바 뒤편의 초록 상자의 반사상을 보시면 일렁이는 모습이 명확하게 보입니다.
+먼 지점의 수면은 하늘색이 더 강하게 표현되는데 이는 [프레넬 효과](https://cutemoomin.tistory.com/entry/%EA%B7%B8%EB%9E%98%ED%94%BD%EC%8A%A4-%EB%B9%9B-%EC%A1%B0%EB%AA%85-%ED%94%84%EB%A0%88%EB%84%AC-%ED%9A%A8%EA%B3%BC#:~:text=%EA%B7%B8%EB%9F%AC%EB%82%98%20%EA%B3%A0%EA%B0%9C%EB%A5%BC%20%EB%93%A4%EC%96%B4%EC%84%9C%20%EC%A7%80%ED%8F%89%EC%84%A0,(Fresnel%20effect)%EB%9D%BC%EA%B3%A0%20%EB%B6%80%EB%A5%B8%EB%8B%A4.)가 구현되었기 때문입니다.
+
+이 정도 되면 물 반사 구현은 완성된 셈입니다.
+기술적으로는 말이죠.
+좀 더 예쁜 물을 만들기 위해서는 일렁임을 조절하거나 색깔을 바꾸는 등 사소한 조정이 필요할 것입니다.
+
+![planar_reflection_7_lighting](/assets/images/graphics_01/planar_reflection_7_lighting.jpg)
+
+물 위에 조명 효과를 넣어 주면 좀 더 있어 보이게 됩니다.
+여전히 별로 예쁘지는 않은데요.
+저는 아티스트가 아니라 엔지니어이므로 여기까지만 하겠습니다. (o_O)a
+
+![planar_reflection_8_final](/assets/images/graphics_01/planar_reflection_8_final.gif)
+
+DUDV map, 프레넬 효과 등 여러모로 신경써야 할 부분이 많습니다.
+그러나 반사 효과 그 자체에만 집중한다면 그 원리는 상당히 간단합니다.
+그렇지 않나요?
+
+![planar_reflection_9_improved](/assets/images/graphics_01/planar_reflection_9_improved.jpg)
+
+나중에 좀 예쁘게 만들어 봤는데 어떤가요?
+
+## 특징
 
 평면 반사에는 한계가 있습니다.
 이름을 보면 알 수 있듯, 평면에밖에 사용하지 못 합니다.
