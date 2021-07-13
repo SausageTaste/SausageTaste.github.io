@@ -21,7 +21,19 @@ use_math: true
 반짝이는 보석, 밤하늘의 은하수, 최신 아이폰까지….
 우리가 어떤 것을 아름답다고 생각하게 만드는 기준이 무엇일까요?
 
-<p><div style='position:relative; padding-bottom:calc(56.25% + 44px)'><iframe scrolling='no' width='100%' height='100%' style='position:absolute;top:0;left:0;' src="https://www.youtube.com/embed/-O5kNPlUV7w" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div></p>
+<p><div style='position:relative; padding-bottom:calc(56.25% + 44px)'>
+    <iframe
+        scrolling='no'
+        width='100%'
+        height='100%'
+        style='position:absolute;top:0;left:0;'
+        src="https://www.youtube.com/embed/-O5kNPlUV7w"
+        title="YouTube video player"
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen
+    ></iframe>
+</div></p>
 
 좋아하는 것, 갖고 싶은 것, 꼭 있어야 하는 것은 아름답다고 인지합니다.
 태양은 지구상의 모든 생명에게 그런 면에서 생명이 살아가는 데 가장 필요한 것, 물이 아름다운 것은 인지상정이겠죠?
@@ -53,10 +65,8 @@ use_math: true
 
 ## 구현
 
-![half-life_planar_reflection_animated](/assets/images/graphics_01/half-life_planar_reflection_animated.gif)
+![half-life_planar_reflection_animated](/assets/images/graphics_01/half-life_planar_reflection_animated.gif)<br>
 *Half-Life 2: Lost Coast에서 개발자 코멘터리를 실행한 장면*
-
-<p/>
 
 하프라이프 2에 등장하는 물 반사에 사용된 기술입니다.
 기본적인 원리는 다음과 같습니다.
@@ -155,11 +165,11 @@ gta5는 수면 반사와 옷가게의 거울 반사 등 필수적인 상황에�
 이러한 기능을 구현하기 위한 방식은 다양합니다.
 
 - 상하좌우앞뒤 6개의 방향의 모습을 담은 6개의 그림을 정육면체처럼 붙여서 360도 사진을 완성하면 cube map
-    ![https://learnopengl.com/img/advanced/cubemaps_skybox.png](https://learnopengl.com/img/advanced/cubemaps_skybox.png)
+    ![https://learnopengl.com/img/advanced/cubemaps_skybox.png](https://learnopengl.com/img/advanced/cubemaps_skybox.png)<br>
     [출처](https://learnopengl.com/Advanced-OpenGL/Cubemaps)
 
 - 마치 공 모양의 지구를 평평하게 펼쳐 지도를 만들 듯 360도 공간을 2차원 이미지로 만든 equirectangular map
-    ![http://paulbourke.net/panorama/objequirectangular/shearing.jpg](http://paulbourke.net/panorama/objequirectangular/shearing.jpg)
+    ![http://paulbourke.net/panorama/objequirectangular/shearing.jpg](http://paulbourke.net/panorama/objequirectangular/shearing.jpg)<br>
     [출처](http://paulbourke.net/panorama/objequirectangular/)
 
 이런 다양한 방식을 통해 모든 방향의 모습을 평면 그림으로 담은 것을 컴퓨터그래픽스에서 환경맵(environment map)이라고 부릅니다.
@@ -170,11 +180,43 @@ gta5는 수면 반사와 옷가게의 거울 반사 등 필수적인 상황에�
 그래서 저는 큐브맵 형태로 변환해서 사용하는 것을 선호하는 편입니다.
 따라서 이후로는 큐브맵에 대해서만 설명토록 하겠습니다.
 
+## 큐브맵 사용 방법
+
+![cubemap_wrapping.jpg](https://i.stack.imgur.com/8yc75.jpg)<br>
+[출처](https://gamedev.stackexchange.com/questions/74535/why-are-cube-map-axes-sometimes-labelled-incorrectly)
+
+큐브맵은 상하좌우앞뒤 총 6개의 이미지로 이루어져 있습니다.
+이것을 마치 주사위 만들 듯 접어 붙이면 모든 방향을 커버하는 하나의 *큐브*가 되지요.
+OpenGL에서도 큐브맵을 만들 때  -X, +X, -Y, +Y, -Z, +Z 여섯 개의 텍스처 각각에 해당 방향에 맞는 이미지를 넣어서 생성합니다.
+
+그리고 이를 렌더링 과정에서 사용할 때는 3차원 벡터를 이용합니다.
+보통 2D 이미지는 가로축, 세로축 두 개의 숫자로 이루어진 좌표로 픽셀을 선택하죠?
+큐브맵은 $(2, 3, 2.5)$처럼 3차원 벡터를 이용, 해당 방향에 있는 픽셀의 색깔을 얻습니다.
+이때, 텍스처에서 색깔을 얻어오는 작업을 **샘플링 sampling**이라고 합니다.
+
+![cubemaps_sampling.png](https://learnopengl.com/img/advanced/cubemaps_sampling.png)<br>
+[출처](https://learnopengl.com/Advanced-OpenGL/Cubemaps)
+
+큐브맵 샘플링에서 유의미한 건 벡터의 방향 뿐, 벡터의 길이는 아무런 상관이 없습니다.
+그래서 벡터 $(1, 0, 0)$과 $(12, 0, 0)$은 완전히 같은 지점을 샘플링 합니다.
+
 ## 큐브맵 반사 Cube map reflection
 
 먼저 다음 영상을 봐주세요.
 
-<p><div style='position:relative; padding-bottom:calc(56.25% + 44px)'><iframe scrolling='no' width='100%' height='100%' style='position:absolute;top:0;left:0;' src="https://www.youtube.com/embed/ZH6s1hbwoQQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div></p>
+<p><div style='position:relative; padding-bottom:calc(56.25% + 44px)'>
+    <iframe
+        scrolling='no'
+        width='100%'
+        height='100%'
+        style='position:absolute;top:0;left:0;'
+        src="https://www.youtube.com/embed/ZH6s1hbwoQQ"
+        title="YouTube video player"
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen
+    ></iframe>
+</div></p>
 
 보시면 플레이어가 움직이면 반사상도 함께 따라오는 모습을 볼 수 있을 것입니다.
 큐브맵 반사의 큰 특징이죠.
@@ -198,6 +240,12 @@ gta5는 수면 반사와 옷가게의 거울 반사 등 필수적인 상황에�
 왜 그런 현상이 일어나는지는 큐브맵 반사를 구현하는 원리를 이해하면 알 수 있습니다.
 
 ![cubemap_graphic](/assets/images/graphics_01/cubemap_graphic.png)
+
+### 수학적 얘기
+
+여기서부터는 수학적인 이야기를 좀 할 텐데요.
+어렵다면 굳이 완전히 이해할 필요는 없습니다.
+그냥 큐브맵 반사에는 벡터 수학이 사용되는구나 생각하고 넘어가 주시면 되겠습니다.
 
 장면을 렌더링 할 때 어떤 점 $P$의 색깔을 결정해야 합니다.
 그 색깔은 여러분의 모니터 어느 한 픽셀의 색깔이 될 예정인데요.
@@ -227,9 +275,7 @@ $A$ 위치에서 건물의 텍스처 색깔을 가져오면 그것이 바로 반
 
 아닙니다!
 방금전 문장에 대해 찬찬히 생각해 봅시다.
-
-> 반사 벡터가 가리키는 방향을 따라간다.
-
+*반사 벡터가 가리키는 방향을 따라간다.*
 이 지극히 단순한 문장을 컴퓨터가 실행한다면, 구체적으로 어떤 연산을 가리킬까요?
 그렇죠.
 레이트레이싱입니다.
@@ -253,20 +299,28 @@ $A$ 위치에서 건물의 텍스처 색깔을 가져오면 그것이 바로 반
 그러면 여러분의 새로운 위치 $E_1$에서 아까랑 같은 각도에 위치한 새로운 지점 $P_1$가 있겠죠.
 그러면 새로운 view 벡터 $\hat{v}_1$은 이전의 $\hat{v}$ 와 정확하게 동일하며 따라서 반사상의 색깔도 그대로입니다.
 이것이 의미하는 바는, 여러분이 아무리 앞뒤로 움직여도, 여러분 입장에서 $v$ 방향에는 언제나 같은 반사상이 위치하게 된다는 것입니다.
-
-`하프라이프 2에서 유저를 따라다니는 반사 영상`
+이것은 위에 있는 소스엔진 큐브맵 반사 영상에서 확인해 보실 수 있습니다.
 
 바닥이나 거울처럼 넓은 면적에서 일어나는 반사를 구현할 때는 큐브맵이 참 별로입니다.
 그런데 큐브맵 반사의 특징은, 점 $P$와 큐브맵 위치 $C$의 거리가 가까울수록 $A$와 $A'$의 차이가 적어진다는 점입니다.
 
 그래서 상대적으로 크기가 작은 물체 안에서 큐브맵 이미지를 생성하면 사람 눈으로는 왜곡을 전혀 눈치챌 수 없는 거의 완벽한 반사를 구현할 수 있게 됩니다.
 
+### 수학 내용을 건너뛰었습니까?
+
+그렇다면 핵심만 짚고 넘어가도록 하겠습니다.
+
+* 반사상의 색깔을 알아내는 작업은, 해당 지점에서 어떤 방향에 어떤 물체가 있나 알아내는 작업임
+* 레이트레이싱을 이용하면 그 방향으로 광선을 쏘아서 알아낼 수 있지만 너무 고사양이 요구됨
+* 그래서 그냥 큐브맵의 해당 방향 색깔을 이용하는 것으로 타협을 봄
+* 큐브맵의 약점 때문이 반사상이 정확하지 않음
+
 ## 시차교정 큐브맵 반사 Parallax corrected cube map reflection
 
 한 가지 생각해 봅시다.
-점 $A$를 찾을 수 있는 이유가 무엇입니까?
+반사상의 위치 $A$를 찾을 수 있는 이유가 무엇입니까?
 레이트레이싱은 너무 비싼 연산이라 그렇습니다.
-그럼 레이트레이싱 없이 점 $A$를 찾을 수 있다면 문제가 해결되는 거 아닐까요?
+그럼 레이트레이싱 없이 반사상의 위치 $A$를 찾을 수 있다면 문제가 해결되는 거 아닐까요?
 
 한 가지 아이디어는, 주변 공간의 모양을 단순한 도형으로 근사(approximate)하는 것입니다.
 가령 직육면체 모양의 방을 생각해 봅시다.
@@ -283,11 +337,27 @@ $A$ 위치에서 건물의 텍스처 색깔을 가져오면 그것이 바로 반
 그러는 대신, 건물을 하나의 거대한 직육면체라고 생각한 뒤, 직육면체에만 광선을 쏴본다면 훨씬 빠를 것입니다.
 직육면체는 12개의 삼각형, 혹은 6개의 평면으로 표현될 수 있어 훨씬 경제적입니다.
 
-<p><div style='position:relative; padding-bottom:calc(56.25% + 44px)'><iframe scrolling='no' width='100%' height='100%' style='position:absolute;top:0;left:0;' src="https://www.youtube.com/embed/OLKbBYM8Les" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div></p>
+<p><div style='position:relative; padding-bottom:calc(56.25% + 44px)'>
+    <iframe
+        scrolling='no'
+        width='100%'
+        height='100%'
+        style='position:absolute;top:0;left:0;'
+        src="https://www.youtube.com/embed/OLKbBYM8Les"
+        title="YouTube video player"
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen
+    ></iframe>
+</div></p>
 
 이것은 제가 OpenGL로 구현한 시차교정 큐브맵 반사입니다.
-영상 후반부에는 다른 건 다 빼고 큐브맵 이미지만 보여주는 부분이 있는데요.
-흥미로울 것 같아서 넣어 봤습니다.
+저는 직육면체 방을 6개의 평면을 이용, 각각에 광선을 발사하여 가장 가까운 점을 $A$로 선택하는 방식으로 구현했습니다.
+그래서 방의 형태는 볼록 다면체여야만 합니다.
+대신 볼록하기만 하다면 육면체, 십이면체 아무리 복잡해도 상관없습니다.
+(볼록한 도형의 특징은 다분히 수학적인 내용이므로 [여기](http://www.rustycode.com/tutorials/convex.html)를 참조해 주세욧.)
+아울러 영상 후반부에는 다른 건 다 빼고 큐브맵 이미지만 보여주는 부분이 있는데요.
+꽤나 흥미로울 거라 생각합니다.
 
 사실은 복잡한 공간을 단순화하는 기법이기 때문에 그 한계점은 명확합니다.
 우선은 제가 그림으로 표현한 것은 탁 트인 공간에서 건물에만 광선을 발사하는 상황을 가정했는데요.
@@ -321,13 +391,33 @@ $A$ 위치에서 건물의 텍스처 색깔을 가져오면 그것이 바로 반
 이게 전부입니다.
 간단한 아이디어지만 게임에서 사용되면 완벽에 가까운 반사를 구현할 수 있습니다.
 
-<p><div style='position:relative; padding-bottom:calc(56.25% + 44px)'><iframe src='https://gfycat.com/ifr/EsteemedConfusedAcornwoodpecker' frameborder='0' scrolling='no' width='100%' height='100%' style='position:absolute;top:0;left:0;' allowfullscreen></iframe></div></p>
+<p><div style='position:relative; padding-bottom:calc(56.25% + 44px)'>
+    <iframe
+        src='https://gfycat.com/ifr/EsteemedConfusedAcornwoodpecker'
+        frameborder='0'
+        scrolling='no'
+        width='100%'
+        height='100%'
+        style='position:absolute;top:0;left:0;'
+        allowfullscreen
+    ></iframe>
+</div></p>
 
 위 영상은 미러스엣지 카탈리스트에서 찍은 것입니다.
 보시면 RTX 부럽지 않은 완벽한 반사를 보여주는데요.
 시야를 아래로 내려보면 반사상이 흐려지는 걸 보니 확실히 화면공간 반사는 맞는 모양입니다.
 
-<p><div style='position:relative; padding-bottom:calc(56.25% + 44px)'><iframe src='https://gfycat.com/ifr/CompleteGlossyGrub' frameborder='0' scrolling='no' width='100%' height='100%' style='position:absolute;top:0;left:0;' allowfullscreen></iframe></div></p>
+<p><div style='position:relative; padding-bottom:calc(56.25% + 44px)'>
+    <iframe
+        src='https://gfycat.com/ifr/CompleteGlossyGrub'
+        frameborder='0'
+        scrolling='no'
+        width='100%'
+        height='100%'
+        style='position:absolute;top:0;left:0;'
+        allowfullscreen
+    ></iframe>
+</div></p>
 
 그런데 고개를 숙이고 이리저리 움직여 보면, 흐릿한 반사가 나름 방의 모양과 잘 맞는 모습을 볼 수 있지요?
 이것이 바로 시차교정 큐브맵 반사입니다.
@@ -364,5 +454,11 @@ $A$ 위치에서 건물의 텍스처 색깔을 가져오면 그것이 바로 반
 | 이름 | 장점 | 단점 |
 | :---: | --- | --- |
 | 평면 반사 | 가장 정확한 반사<br>물체의 변화 실시간 반영 | 렌더링 속도가 너무 느려 사양되는 추세 |
-| 큐브맵 반사 | 한 번 큐브맵 생성하면 이후엔 낮은 비용으로 반사 구현 | 반사상 위치가 어긋남<br>실시간 변화 반영이 어려움 |
+| 큐브맵 반사 | 한 번 큐브맵 생성하면 이후엔 낮은 비용으로 반사 구현<br>흐린 반사상 구현 가능 (거친 표면 등) | 반사상 위치가 어긋남 (시차교정으로 제한적 개선 가능)<br>실시간 변화 반영이 어려움 |
 | 화면공간 반사 | 정확한 반사상<br>흐린 반사상 구현 가능<br>낮은 비용으로 실시간 변화 반영 가능 | 반사상 색깔 알아내기를 실패할 가능성 높음 |
+
+# 참고자료
+
+* [YouTube - Parallax Corrected Cubemaps \| Operation Black Mesa / Guard Duty](https://www.youtube.com/watch?v=JB05cvycfLI&t=38s)
+* [learnopengl.com - Advanced OpenGL - Cubemaps](https://learnopengl.com/Advanced-OpenGL/Cubemaps)
+* [Sébastien Lagarde, Antoine Zanuttini. Local Image-based Lighting With Parallax-corrected Cubemap. SIGGRAPH2012](https://seblagarde.files.wordpress.com/2012/08/parallax_corrected_cubemap-siggraph2012.pdf)
