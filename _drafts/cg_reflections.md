@@ -21,7 +21,7 @@ use_math: true
 반짝이는 보석, 밤하늘의 은하수, 최신 아이폰까지….
 우리가 어떤 것을 아름답다고 생각하게 만드는 기준이 무엇일까요?
 
-`Kurtkasegt의 영상 Beauty 참조`
+<p><div style='position:relative; padding-bottom:calc(56.25% + 44px)'><iframe scrolling='no' width='100%' height='100%' style='position:absolute;top:0;left:0;' src="https://www.youtube.com/embed/-O5kNPlUV7w" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div></p>
 
 좋아하는 것, 갖고 싶은 것, 꼭 있어야 하는 것은 아름답다고 인지합니다.
 태양은 지구상의 모든 생명에게 그런 면에서 생명이 살아가는 데 가장 필요한 것, 물이 아름다운 것은 인지상정이겠죠?
@@ -54,6 +54,9 @@ use_math: true
 ## 구현
 
 ![half-life_planar_reflection_animated](/assets/images/graphics_01/half-life_planar_reflection_animated.gif)
+*Half-Life 2: Lost Coast에서 개발자 코멘터리를 실행한 장면*
+
+<p/>
 
 하프라이프 2에 등장하는 물 반사에 사용된 기술입니다.
 기본적인 원리는 다음과 같습니다.
@@ -153,9 +156,11 @@ gta5는 수면 반사와 옷가게의 거울 반사 등 필수적인 상황에�
 
 - 상하좌우앞뒤 6개의 방향의 모습을 담은 6개의 그림을 정육면체처럼 붙여서 360도 사진을 완성하면 cube map
     ![https://learnopengl.com/img/advanced/cubemaps_skybox.png](https://learnopengl.com/img/advanced/cubemaps_skybox.png)
+    [출처](https://learnopengl.com/Advanced-OpenGL/Cubemaps)
 
 - 마치 공 모양의 지구를 평평하게 펼쳐 지도를 만들 듯 360도 공간을 2차원 이미지로 만든 equirectangular map
     ![http://paulbourke.net/panorama/objequirectangular/shearing.jpg](http://paulbourke.net/panorama/objequirectangular/shearing.jpg)
+    [출처](http://paulbourke.net/panorama/objequirectangular/)
 
 이런 다양한 방식을 통해 모든 방향의 모습을 평면 그림으로 담은 것을 컴퓨터그래픽스에서 환경맵(environment map)이라고 부릅니다.
 환경맵은 스트리트뷰처럼 색깔 그대로 렌더링 하여 사용할 수도 있으며, 이를 응용하면 스카이박스를 구현할 수 있습니다.
@@ -169,7 +174,7 @@ gta5는 수면 반사와 옷가게의 거울 반사 등 필수적인 상황에�
 
 먼저 다음 영상을 봐주세요.
 
-<div style='position:relative; padding-bottom:calc(56.25% + 44px)'><iframe scrolling='no' width='100%' height='100%' style='position:absolute;top:0;left:0;' src="https://www.youtube.com/embed/ZH6s1hbwoQQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+<p><div style='position:relative; padding-bottom:calc(56.25% + 44px)'><iframe scrolling='no' width='100%' height='100%' style='position:absolute;top:0;left:0;' src="https://www.youtube.com/embed/ZH6s1hbwoQQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div></p>
 
 보시면 플레이어가 움직이면 반사상도 함께 따라오는 모습을 볼 수 있을 것입니다.
 큐브맵 반사의 큰 특징이죠.
@@ -278,7 +283,7 @@ $A$ 위치에서 건물의 텍스처 색깔을 가져오면 그것이 바로 반
 그러는 대신, 건물을 하나의 거대한 직육면체라고 생각한 뒤, 직육면체에만 광선을 쏴본다면 훨씬 빠를 것입니다.
 직육면체는 12개의 삼각형, 혹은 6개의 평면으로 표현될 수 있어 훨씬 경제적입니다.
 
-<div style='position:relative; padding-bottom:calc(56.25% + 44px)'><iframe scrolling='no' width='100%' height='100%' style='position:absolute;top:0;left:0;' src="https://www.youtube.com/embed/OLKbBYM8Les" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+<p><div style='position:relative; padding-bottom:calc(56.25% + 44px)'><iframe scrolling='no' width='100%' height='100%' style='position:absolute;top:0;left:0;' src="https://www.youtube.com/embed/OLKbBYM8Les" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div></p>
 
 이것은 제가 OpenGL로 구현한 시차교정 큐브맵 반사입니다.
 영상 후반부에는 다른 건 다 빼고 큐브맵 이미지만 보여주는 부분이 있는데요.
@@ -306,7 +311,7 @@ $A$ 위치에서 건물의 텍스처 색깔을 가져오면 그것이 바로 반
 기본적인 내용은 제가 이전에 작성한 글 [RTX란 무엇인가 2편 - 레이트레이싱 이전의 기술](/2020/11/16/what_is_rtx_2.html)을 읽어 주세요!
 
 위 내용을 잘 읽어보셨다면 화면공간 반사의 장점과 단점을 이해하셨을 겁니다.
-(힘들었다면 댓글로 말씀해 주세요.)
+(어려웠다면 댓글로 말씀해 주세요.)
 장점은 실시간으로 변하는 장면을 반사에 반영할 수 있으면서도 컴퓨팅 파워도 적게 소모한다는 점이구요.
 단점은 화면에 나타나지 않는 물체는 반사되지 못 한다는 점이죠.
 그러니 여기서 큐브맵 반사와 화면공간 반사를 함께 사용하여 둘의 장점만 취할 수 있게 됩니다.
@@ -316,30 +321,48 @@ $A$ 위치에서 건물의 텍스처 색깔을 가져오면 그것이 바로 반
 이게 전부입니다.
 간단한 아이디어지만 게임에서 사용되면 완벽에 가까운 반사를 구현할 수 있습니다.
 
-<div style='position:relative; padding-bottom:calc(56.25% + 44px)'><iframe src='https://gfycat.com/ifr/EsteemedConfusedAcornwoodpecker' frameborder='0' scrolling='no' width='100%' height='100%' style='position:absolute;top:0;left:0;' allowfullscreen></iframe></div>
+<p><div style='position:relative; padding-bottom:calc(56.25% + 44px)'><iframe src='https://gfycat.com/ifr/EsteemedConfusedAcornwoodpecker' frameborder='0' scrolling='no' width='100%' height='100%' style='position:absolute;top:0;left:0;' allowfullscreen></iframe></div></p>
 
 위 영상은 미러스엣지 카탈리스트에서 찍은 것입니다.
 보시면 RTX 부럽지 않은 완벽한 반사를 보여주는데요.
 시야를 아래로 내려보면 반사상이 흐려지는 걸 보니 확실히 화면공간 반사는 맞는 모양입니다.
 
-<div style='position:relative; padding-bottom:calc(56.25% + 44px)'><iframe src='https://gfycat.com/ifr/CompleteGlossyGrub' frameborder='0' scrolling='no' width='100%' height='100%' style='position:absolute;top:0;left:0;' allowfullscreen></iframe></div>
+<p><div style='position:relative; padding-bottom:calc(56.25% + 44px)'><iframe src='https://gfycat.com/ifr/CompleteGlossyGrub' frameborder='0' scrolling='no' width='100%' height='100%' style='position:absolute;top:0;left:0;' allowfullscreen></iframe></div></p>
 
 그런데 고개를 숙이고 이리저리 움직여 보면, 흐릿한 반사가 나름 방의 모양과 잘 맞는 모습을 볼 수 있지요?
-이것이 바로 시차교정 큐브맵입니다.
+이것이 바로 시차교정 큐브맵 반사입니다.
 
-사실 플레이어가 게임을 하면서 위나 아래를 보고 다니지 않죠?
+사실 여러분은 게임을 하면서 위나 아래를 보고 다니지 않죠?
 일반적인 상황에서는 앞을 보고 돌아다닙니다.
 그래서 화면공간 반사에 필요한 반사상이 모두 화면에 포착이 되는 경우가 많습니다.
-그리고 일반적인 상황이 아닐 때 큐브맵을 보완으로 사용하며, 실내에서는 시차교정까지 구사함으로써 약점을 최대한 보완하는 것이 기본 전략입니다.
+그리고 일반적인 상황이 아닐 때 큐브맵으로 보완, 실내에서는 시차교정까지 구사함으로써 약점을 최대한 보완하는 것이 기본 전략입니다.
 
 혹시 여러분들은 이 글을 읽기 전까지 미러스엣지에서 반사의 이상한 부분을 눈치채지 못 하셨을지 모르겠네요.
 이런 태크닉이 사이버펑크 2077, 배틀필드 5, gta5 등 다양한 게임에서 사용되었다는 사실을 알고 계신가요?
 게임 엔진 개발자들은 플레이어들이 반사의 이상한 점을 눈치채지 못 하게 만들려고 많은 노력을 하고 있습니다.
+제가 게임 엔진의 환상을 깨버렸다면 죄상한 부분이구연. ㅎㅎ
+
+# 마치며
+
+반사는 아름답습니다.
+게임 엔진 개발자들은 초창기 때부터 이를 잘 인지하고 있었으며, 자신의 게임에 구현해내기 위해 많은 노력을 기울여 왔습니다.
+일반인인 우리 입장에서 보기에, 이런 아름다운 반사가 사실은 오로지 수학의 힘으로 만들어졌다는 것은 놀라운 점입니다.
+뭔가 고딩 때 수학 공부를 열심히 하지 않은 것에 대한 후회가 물밀들이 밀려옵니다.
+
+만약 수학 선생님이 게임 엔진의 원리를 잘 알고 있어서 수업에 이러한 내용을 접목시킬 수 있다면 어떨까 싶습니다.
+기하와 벡터 단원만 보면 말이죠.
+평면과 선분의 교점 구하기 문제는 발사된 총알이 적을 명중했는가 검사하는 사례를 통해 설명할 수 있겠구요.
+벡터의 내적의 성질에 대해서는 Separate Axis 정리라던가, 조명의 위치에 따른 물체 표면의 밝기 같은 문제로 보여줄 수 있겠네요.
+적문 문제는 대기 산란 모형(atmospheric scattering models)을 이용, gta5 스크린샷을 보여주며 가르치면 어떨까 싶습니다.
+
+여러분도 게임에서 사용되는 수학에 대해 알아가면서 수학에 대한 재미를 길러 보시면 어떨까요?
+이상, 문과 수학 4등급 받은 수포자 게임 엔진 개발자였습니다.
+감사합니다!
 
 # 요약
 
 | 이름 | 장점 | 단점 |
 | :---: | --- | --- |
-| 평면 반사 | 가장 정확한 반사, 물체의 변화 실시간 반영 | 렌더링 속도가 너무 느려 사양되는 추세 |
-| 큐브맵 반사|한 번 큐브맵 생성하면 이후엔 낮은 비용으로 반사 구현 | 반사상 위치가 어긋남, 실시간 변화 반영이 어려움 |
-| 화면공간 반사|정확한 반사상, 흐린 반사상 구현 가능, 낮은 비용으로 실시간 변화 반영 가능 | 반사상 색깔 알아내기를 실패할 가능성 높음 |
+| 평면 반사 | 가장 정확한 반사<br>물체의 변화 실시간 반영 | 렌더링 속도가 너무 느려 사양되는 추세 |
+| 큐브맵 반사 | 한 번 큐브맵 생성하면 이후엔 낮은 비용으로 반사 구현 | 반사상 위치가 어긋남<br>실시간 변화 반영이 어려움 |
+| 화면공간 반사 | 정확한 반사상<br>흐린 반사상 구현 가능<br>낮은 비용으로 실시간 변화 반영 가능 | 반사상 색깔 알아내기를 실패할 가능성 높음 |
