@@ -252,7 +252,7 @@ $A$ 위치에서 건물의 텍스처 색깔을 가져오면 그것이 바로 반
 `하프라이프 2에서 유저를 따라다니는 반사 영상`
 
 바닥이나 거울처럼 넓은 면적에서 일어나는 반사를 구현할 때는 큐브맵이 참 별로입니다.
-그런데 큐브맵 반사의 특징은, 점 $P$와 큐브맵 위치 $C$의 거리가 가까울수록 $A$와 $A`$의 차이가 적어진다는 점입니다.
+그런데 큐브맵 반사의 특징은, 점 $P$와 큐브맵 위치 $C$의 거리가 가까울수록 $A$와 $A'$의 차이가 적어진다는 점입니다.
 
 그래서 상대적으로 크기가 작은 물체 안에서 큐브맵 이미지를 생성하면 사람 눈으로는 왜곡을 전혀 눈치챌 수 없는 거의 완벽한 반사를 구현할 수 있게 됩니다.
 
@@ -277,6 +277,12 @@ $A$ 위치에서 건물의 텍스처 색깔을 가져오면 그것이 바로 반
 레이트레이싱으로 점 $A$를 찾으려면 저 빌딩의 수많은 삼각형과 교점 검사를 해봐야 할 것입니다.
 그러는 대신, 건물을 하나의 거대한 직육면체라고 생각한 뒤, 직육면체에만 광선을 쏴본다면 훨씬 빠를 것입니다.
 직육면체는 12개의 삼각형, 혹은 6개의 평면으로 표현될 수 있어 훨씬 경제적입니다.
+
+<div style='position:relative; padding-bottom:calc(56.25% + 44px)'><iframe scrolling='no' width='100%' height='100%' style='position:absolute;top:0;left:0;' src="https://www.youtube.com/embed/OLKbBYM8Les" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+
+이것은 제가 OpenGL로 구현한 시차교정 큐브맵 반사입니다.
+영상 후반부에는 다른 건 다 빼고 큐브맵 이미지만 보여주는 부분이 있는데요.
+흥미로울 것 같아서 넣어 봤습니다.
 
 사실은 복잡한 공간을 단순화하는 기법이기 때문에 그 한계점은 명확합니다.
 우선은 제가 그림으로 표현한 것은 탁 트인 공간에서 건물에만 광선을 발사하는 상황을 가정했는데요.
@@ -311,6 +317,24 @@ $A$ 위치에서 건물의 텍스처 색깔을 가져오면 그것이 바로 반
 간단한 아이디어지만 게임에서 사용되면 완벽에 가까운 반사를 구현할 수 있습니다.
 
 <div style='position:relative; padding-bottom:calc(56.25% + 44px)'><iframe src='https://gfycat.com/ifr/EsteemedConfusedAcornwoodpecker' frameborder='0' scrolling='no' width='100%' height='100%' style='position:absolute;top:0;left:0;' allowfullscreen></iframe></div>
+
+위 영상은 미러스엣지 카탈리스트에서 찍은 것입니다.
+보시면 RTX 부럽지 않은 완벽한 반사를 보여주는데요.
+시야를 아래로 내려보면 반사상이 흐려지는 걸 보니 확실히 화면공간 반사는 맞는 모양입니다.
+
+<div style='position:relative; padding-bottom:calc(56.25% + 44px)'><iframe src='https://gfycat.com/ifr/CompleteGlossyGrub' frameborder='0' scrolling='no' width='100%' height='100%' style='position:absolute;top:0;left:0;' allowfullscreen></iframe></div>
+
+그런데 고개를 숙이고 이리저리 움직여 보면, 흐릿한 반사가 나름 방의 모양과 잘 맞는 모습을 볼 수 있지요?
+이것이 바로 시차교정 큐브맵입니다.
+
+사실 플레이어가 게임을 하면서 위나 아래를 보고 다니지 않죠?
+일반적인 상황에서는 앞을 보고 돌아다닙니다.
+그래서 화면공간 반사에 필요한 반사상이 모두 화면에 포착이 되는 경우가 많습니다.
+그리고 일반적인 상황이 아닐 때 큐브맵을 보완으로 사용하며, 실내에서는 시차교정까지 구사함으로써 약점을 최대한 보완하는 것이 기본 전략입니다.
+
+혹시 여러분들은 이 글을 읽기 전까지 미러스엣지에서 반사의 이상한 부분을 눈치채지 못 하셨을지 모르겠네요.
+이런 태크닉이 사이버펑크 2077, 배틀필드 5, gta5 등 다양한 게임에서 사용되었다는 사실을 알고 계신가요?
+게임 엔진 개발자들은 플레이어들이 반사의 이상한 점을 눈치채지 못 하게 만들려고 많은 노력을 하고 있습니다.
 
 # 요약
 
