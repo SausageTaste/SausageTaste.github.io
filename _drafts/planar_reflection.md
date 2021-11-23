@@ -42,10 +42,10 @@ $$
 
 단순하게 $y$축에 마이너스를 곱해서 위아래를 뒤집었었습니다.
 $y$축이 상승 하강 방향을 표현하는 축이라고 했을 때, 이 방향을 따라 온세상을 위아래로 뒤집으면 그 결과는 물 반사와 같은 모습이 되겠지요.
-즉, xz 평면을 기준으로 면대칭을 이루도록 뒤집어 주는 것입니다.
+즉, $xz$ 평면을 기준으로 면대칭을 이루도록 뒤집어 주는 것입니다.
 
 물론 이 방식대로 하면 큰 한계가 있습니다.
-물이나 거울의 표면이 정확하게 xz 평면과 일치해야만 반사상의 위치가 정확합니다.
+물이나 거울의 표면이 정확하게 $xz$ 평면과 일치해야만 반사상의 위치가 정확합니다.
 
 `임의의 평면으로 반사를 구현한 영상`
 
@@ -54,7 +54,7 @@ $y$축이 상승 하강 방향을 표현하는 축이라고 했을 때, 이 방�
 아이디어는 다음과 같습니다.
 주의깊게 읽어 주세요.
 
-현재 행렬은 거울이 xz 평면과 일치할 때만 유효하다고 했지요?
+현재 행렬은 거울이 $xz$ 평면과 일치할 때만 유효하다고 했지요?
 그러니 거울을 포함한 온세상을 통채로 움직여서 거울이 xz와 일치하도록 해줍시다.
 그러면 위에서 봤던 것처럼 y 값의 부호만 바꿔서 거울 반사상을 만들 수 있습니다.
 그런 다음 온세상을 아까 통채로 움직이도록 했던 것의 반대로 움직여 줍니다.
@@ -66,7 +66,7 @@ $y$축이 상승 하강 방향을 표현하는 축이라고 했을 때, 이 방�
 
 `거울와 장면 전체를 회전하는 그래픽`
 
-거울이 xz 평면과 일치하도록 이동시키는 변환 행렬을 $A$로 두겠습니다.
+거울이 $xz$ 평면과 일치하도록 이동시키는 변환 행렬을 $A$로 두겠습니다.
 이것이 바로 아까 말했던 온세상의 움직임입니다.
 만약 행렬을 이용해 공간을 움직인다는 개념에 대해 잘 모르신다면 3Blue1Brown의 Linear Algebra 유튜브 동영상을 시청하고 와주시기 바랍니다.
 
@@ -86,7 +86,7 @@ $$
 $A$는 공간의 수평이동도 수행해야 하므로 아핀 공간에서의 변환인 4x4 행렬이 되어야 합니다.
 위의 식을 통해 얻은 행렬 $M_{reflection}$을 이용, 버택스 셰이더에서 다음과 같이 변환하면 반사상 이미지를 얻을 수 있습니다.
 
-$$ \bold{v}^{\prime} = M_{projection} \times M_{view} \times M_{reflection} \times M_{model} \times \bold{v} $$
+$$ \boldsymbol{v}^{\prime} = M_{projection} \times M_{view} \times M_{reflection} \times M_{model} \times \boldsymbol{v} $$
 
 이 반사상 이미지를 거울이 그려지는 부분에 그대로 갖다 붙이면 완벽한 반사상이 완성됩니다.
 여기까지는 그렇게 어렵지 않는 부분일 거라 생각합니다.
@@ -100,13 +100,13 @@ $T$는 평면이 원점과 겹치도록 평행이동을 수행하는 행렬입�
 
 `아무렇게나 놓여 있는 거울을 원점으로 옮기는 그림`
 
-그리고 $R$은 거울 평면이 xz 평면과 수평이 되도록 원점을 중심으로 회전해 주는 행렬입니다.
+그리고 $R$은 거울 평면이 $xz$ 평면과 수평이 되도록 원점을 중심으로 회전해 주는 행렬입니다.
 
 `원점과 만난 거울이 수평이 되도록 회전시키는 그림`
 
 행렬의 곱셈은 왼쪽에서 오른쪽으로 해나가지만, 변환의 적용 순서는 오른쪽에서 왼쪽입니다.
-여기서 R을 통한 회전을 하려는 시점에는 T의 평행이동이 이미 적용되어 있는 상태입니다.
-그러므로 원점과 딱 붙어 있는 평면을 원점을 기준으로 회전시키면 xz 평면과 일치하게 만들 수 있는 것이죠.
+여기서 $R$을 통한 회전을 하려는 시점에는 $T$의 평행이동이 이미 적용되어 있는 상태입니다.
+그러므로 원점과 딱 붙어 있는 평면을 원점을 기준으로 회전시키면 $xz$ 평면과 일치하게 만들 수 있는 것이죠.
 
 행렬 A의 특성을 시각적으로 한번 알아 봤는데요.
 컴퓨터가 계산을 해내기 위해서는 이 모든 것이 숫자로 표현되어야겠죠?
@@ -116,40 +116,66 @@ $T$는 평면이 원점과 겹치도록 평행이동을 수행하는 행렬입�
 
 $T$와 $R$을 구하려면 우선 평면을 수학적으로 표현해야겠지요.
 바로 고등학교 기하와 벡터 시간에 배운 **평면의 방정식**을 사용할 때입니다.
+아래처럼 생긴 거 기억 나시나요?
 
 $$ ax + by + cz + d = 0 $$
 
-여기서 $a$, $b$, $c$는 셋이 모여 3차원 벡터를 형성하면 그것은 해당 평면의 법선(normal) 벡터가 됩니다.
-이것을 $n$으로 표기하겠습니다.
-그리고 $n$을 길이가 1인 단위 벡터로 만든 것을 $\hat{n}$으로 포기하겠습니다.
+여기서 a, b, c는 3차원 벡터를 이뤄서 평면의 법선(normal) 벡터가 되는데요.
+이 법선 벡터의 길이는 1이어야 합니다.
+즉, 다음 등식을 만족해야 합니다.
 
+$$ \sqrt{a^2 + b^2 + c^2} = 1 $$
+
+거울의 위치 정보를 이용해서 평면의 방정식을 만들 수 있지요.
+평면은 세 개의 점을 이용해서 만들 수도 있고, 하나의 점과 하나의 방향을 가지고 만들 수도 있습니다.
+
+만약 거울의 모서리 세 개의 점 $\boldsymbol{p}$, $\boldsymbol{q}$, $\boldsymbol{r}$을 알고 있다면 다음과 같이 평면의 법선 벡터를 구합니다.
+
+$$ (a', b', c') = (\boldsymbol{q} - \boldsymbol{p}) \times (\boldsymbol{r} - \boldsymbol{p}) $$
+
+이때, 법선 벡터는 정규화되어야 합니다.
+
+$$ (a, b, c) = \frac{(a', b', c')}{\sqrt{a'^2 + b'^2 + c'^2}} $$
+
+이제 내적을 이용해 마지막 남은 값 $d$를 찾으면 끝입니다.
+
+$$ d = -(a, b, c) \cdot \boldsymbol{p} $$
+
+이렇게 해서 거울과 겹치는 평면의 방정식 $ax + by + cz + d = 0$을 완성했습니다.
 이것을 사용하면 $T$와 $R$을 쉽게 구할 수 있습니다.
 
 ### 평행이동 $T$ 구하기
 
 $T$를 구하기 위해서는 평면 위의 아무 점 하나를 선택해 줍시다.
-평면의 방정식에서 x와 y 자리에 아무 숫자나 넣고 z에 대하여 정리하면 임의의 점 (x, y, z)를 구할 수 있지요. 그렇게 얻은 3차원 벡터를 $\bold{\alpha} = (\alpha_x, \alpha_y, \alpha_z)$로 두겠습니다.
-그러면 T는 다음과 같습니다.
+평면의 방정식에서 $x$와 $y$ 자리에 아무 숫자나 넣고 $z$에 대하여 정리하면 임의의 점 $(x, y, z)$를 구할 수 있지요.
+
+아무 점이라고 말하긴 했지만 말이죠.
+사실 컴퓨터에는 부동소수점 정밀도 문제가 있기 때문에, 가능한 한 원점이랑 가까운 점을 선택하는 것이 좋습니다.
+다음 공식을 사용하면 평면 위의 점들 중 원점과 가장 가까운 것을 알아낼 수 있습니다.
+
+$$ \boldsymbol{\beta} = (\beta_x, \beta_y, \beta_z) =  -d(a, b, c) =  (-ad, -bd, -cd) $$
+
+그러면 $T$는 다음과 같습니다.
 
 $$
 T =
 \begin{bmatrix}
-    1 & 0 & 0 & -\alpha_x \\
-    0 & 1 & 0 & -\alpha_y \\
-    0 & 0 & 1 & -\alpha_z \\
+    1 & 0 & 0 & -\beta_x \\
+    0 & 1 & 0 & -\beta_y \\
+    0 & 0 & 1 & -\beta_z \\
     0 & 0 & 0 & 1 \\
 \end{bmatrix}
 $$
 
-아핀 변환이 익숙하지 않은 분이라면 이게 뭔 괴상환 모양인가 하실지도 모르겠습니다.
+아핀 변환이 익숙하지 않은 분이라면 이게 뭔 괴상한 모양인가 하실지도 모르겠습니다.
 그럴 때는 종이를 꺼내서 직접 계산을 해보면 한 방에 이해가 될 겁니다.
 
 $$
-T \times \bold{v} =
+T \times \boldsymbol{v} =
 \begin{bmatrix}
-    1 & 0 & 0 & -\alpha_x \\
-    0 & 1 & 0 & -\alpha_y \\
-    0 & 0 & 1 & -\alpha_z \\
+    1 & 0 & 0 & -\beta_x \\
+    0 & 1 & 0 & -\beta_y \\
+    0 & 0 & 1 & -\beta_z \\
     0 & 0 & 0 & 1 \\
 \end{bmatrix}
 \times
@@ -161,25 +187,27 @@ T \times \bold{v} =
 \end{bmatrix}
 =
 \begin{bmatrix}
-    v_x -\alpha_x \\
-    v_y -\alpha_y \\
-    v_z -\alpha_z \\
+    v_x -\beta_x \\
+    v_y -\beta_y \\
+    v_z -\beta_z \\
     1 \\
 \end{bmatrix}
 $$
 
-실질적으로는 $\bold{v} - \bold{\alpha}$를 4x4 행렬로 표현한 것에 불과하죠.
-이렇게 하는 이유는 T를 R과 결합하기 위함입니다.
+실질적으로는 $\boldsymbol{v} - \boldsymbol{\beta}$를 4x4 행렬로 표현한 것에 불과하죠.
+아니 왜 굳이 이렇게 복잡하게 표기하냐고 물을 수 있을 텐데요.
+그 이유는 $T$를 $R$과 결합하고, 그리고 projection, view, model 행렬과 합쳐서 단 하나의 행렬을 만들어 내기 위함입니다.
+이 부분은 컴퓨터 그래픽스에 대한 지식이 없다면 공감하기 힘들 수 있겠네요.
 
 ### 회전 $R$ 구하기
 
-이제 R을 구할 차례입니다.
+이제 $R$을 구할 차례입니다.
 아까 말씀드린 대로, 회전을 적용하려고 하는 시점에서 거울에는 $T$ 변환이 적용되어 이미 원점과 접하고 있습니다.
-이제 남은 것은 거울과 xz 평면이 같은 방향을 바라보고 있으면 되겠네요.
+이제 남은 것은 거울과 $xz$ 평면이 같은 방향을 바라보고 있으면 되겠네요.
 
-xz 평면이 바라보고 있는 방향은 3차원 벡터로
+$xz$ 평면이 바라보고 있는 방향은 3차원 벡터로
 
-$$ \bold{n}_{xz} = (0, 1, 0) $$
+$$ \boldsymbol{n}_{xz} = (0, 1, 0) $$
 
 입니다.
 다들 이미 아시겠지요?
@@ -190,29 +218,29 @@ $$ ax + by + cz + d = 0 $$
 
 여기서 평면이 바라보는 방향, 즉 법선 벡터는
 
-$$ \bold{n} = (a, b, c) $$
+$$ \boldsymbol{n} = (a, b, c) $$
 
 처럼 구할 수 있지요.
 계산의 편의성을 위해 둘 다 길이를 1로 정규화(normalize) 해줍시다.
-$\bold{n}_{xz}$은 이미 길이가 1이므로 $\bold{n}$만 변환해 주면 되겠군요.
+$\boldsymbol{n}_{xz}$은 이미 길이가 1이므로 $\boldsymbol{n}$만 변환해 주면 되겠군요.
 
-$$ \hat{\bold{n}} = \frac{\bold{n}}{||\bold{n}||} = \frac{(a, b, c)}{\sqrt{a^2 + b^2 + c^2}} $$
+$$ \hat{\boldsymbol{n}} = \frac{\boldsymbol{n}}{||\boldsymbol{n}||} = (\frac{a}{\sqrt{a^2 + b^2 + c^2}}, \frac{b}{\sqrt{a^2 + b^2 + c^2}}, \frac{c}{\sqrt{a^2 + b^2 + c^2}}) $$
 
 이 정도는 고등학교 기하와 벡터 시간에 배웠을 거라고 믿습니다!
 그럼 이제 $n_{xz}$랑 $\hat{n}$이 일치하도록 만들어 주는 회전을 찾으면 되겠네요.
 
 두 벡터 사이의 각도 $\theta$는 내적을 이용해 구할 수 있죠.
 
-$$ \bold{n}_{xz} \cdot \hat{\bold{n}} = \cos \theta $$
+$$ \boldsymbol{n}_{xz} \cdot \hat{\boldsymbol{n}} = \cos \theta $$
 
-$$ \theta = \arccos (\bold{n}_{xz} \cdot \hat{\bold{n}}) $$
+$$ \theta = \arccos (\boldsymbol{n}_{xz} \cdot \hat{\boldsymbol{n}}) $$
 
 그리고 회전축은 외적을 이용해 구할 수 있습니다.
 
-$$ \bold{a} = (a_x, a_y, a_z) = \bold{n}_{xz} \times \hat{\bold{n}} $$
+$$ \boldsymbol{\alpha} = (\alpha_x, \alpha_y, \alpha_z) = \boldsymbol{n}_{xz} \times \hat{\boldsymbol{n}} $$
 
 다 왔습니다!
-이제 $axis$를 회전축으로 하여 $\theta$만큼 온세상을 회전시켜 주면 됩니다.
+이제 $\boldsymbol{\alpha}$를 회전축으로 하여 $\theta$만큼 온세상을 회전시켜 주면 됩니다.
 그런 행렬은 [이 글](https://www.euclideanspace.com/maths/geometry/rotations/conversions/angleToMatrix/index.htm)이 잘 설명하고 있으니 참고해 주세요.
 
 $$
@@ -226,16 +254,16 @@ R =
 +
 (1 - \cos \theta)
 \begin{bmatrix}
-    a_x a_x & a_x a_y & a_x a_z \\
-    a_x a_y & a_y a_y & a_y a_z \\
-    a_x a_z & a_y a_z & a_z a_z \\
+    \alpha_x \alpha_x & \alpha_x \alpha_y & \alpha_x \alpha_z \\
+    \alpha_x \alpha_y & \alpha_y \alpha_y & \alpha_y \alpha_z \\
+    \alpha_x \alpha_z & \alpha_y \alpha_z & \alpha_z \alpha_z \\
 \end{bmatrix}
 +
 \sin \theta
 \begin{bmatrix}
-    0    & -a_z & a_y  \\
-    a_z  & 0    & -a_x \\
-    -a_y & a_x  & 0    \\
+    0    & -\alpha_z & \alpha_y  \\
+    \alpha_z  & 0    & -\alpha_x \\
+    -\alpha_y & \alpha_x  & 0    \\
 \end{bmatrix}
 $$
 
@@ -244,10 +272,22 @@ $$
 $$
 R =
 \begin{bmatrix}
-    (1 - \cos \theta) a_x a_x + \cos \theta      &  (1 - \cos \theta) a_x a_y - a_z \sin \theta  &  (1 - \cos \theta) a_x a_z + a_y \sin \theta  &  0 \\
-    (1 - \cos \theta) a_x a_y + a_z \sin \theta  &  (1 - \cos \theta) a_y a_y + \cos \theta      &  (1 - \cos \theta) a_y a_z - a_x \sin \theta  &  0 \\
-    (1 - \cos \theta) a_x a_z - a_y \sin \theta  &  (1 - \cos \theta) a_y a_z + a_x \sin \theta  &  (1 - \cos \theta) a_z a_z + \cos \theta      &  0 \\
-    0                  & 0                   & 0                   &  1 \\
+    (1 - \cos \theta) \alpha_x \alpha_x + \cos \theta &
+    (1 - \cos \theta) \alpha_x \alpha_y - \alpha_z \sin \theta &
+    (1 - \cos \theta) \alpha_x \alpha_z + \alpha_y \sin \theta &
+    0 \\
+
+    (1 - \cos \theta) \alpha_x \alpha_y + \alpha_z \sin \theta &
+    (1 - \cos \theta) \alpha_y \alpha_y + \cos \theta &
+    (1 - \cos \theta) \alpha_y \alpha_z - \alpha_x \sin \theta &
+    0 \\
+
+    (1 - \cos \theta) \alpha_x \alpha_z - \alpha_y \sin \theta &
+    (1 - \cos \theta) \alpha_y \alpha_z + \alpha_x \sin \theta  &
+    (1 - \cos \theta) \alpha_z \alpha_z + \cos \theta      &
+    0 \\
+
+    0 & 0 & 0 & 1 \\
 \end{bmatrix}
 $$
 
@@ -292,18 +332,35 @@ glm::mat4 roate_about_axis_2(const float radians, const glm::vec3& axis) {
 }
 ```
 
-이러한 과정을 거치면 마침내 거울을 xz 평면으로 이동시키는 행렬 $A = R \times T$를 찾을 수 있습니다.
+두 함수 모두 완전히 같은 일은 하기 때문에 둘 다 올바르게 작동합니다.
+`roate_about_axis_2`가 좀 더 유지보수 하기 좋아 보이죠?
+
+이러한 과정을 거치면 마침내 거울을 $xz$ 평면으로 이동시키는 행렬 $A = R \times T$를 찾을 수 있습니다.
+이 복잡한 행렬에다 어떻게 곱셈을 할지 아찔해 보일 겁니다.
+하지만 행렬의 곱셈은 컴퓨터가 알아서 해야죠!
+그걸 왜 사람이 합니까?
+
+```cpp
+const glm::mat4 T = ...
+const glm::mat4 R = roate_about_axis(...);
+const glm::mat4 A = R * T;
+```
+
 가장 어려운 부분은 이제 끝났습니다!
 이제 워에서 설명한 대로 행렬 $A$를 이용만 하면 완벽한 거울 대칭의 상을 만들어낼 수 있습니다.
 
-# 다음은 포탈이다
+# 다음은 포탈이다!
 
 바라건데 이 글을 읽은 분들이 평면 반사에 사용되는 수학을 제대로 이해하셨을 것입니다.
 그렇다면 다음 단계로 넘어갈 준비가 되어 있습니다.
 
 하프라이프를 개발한 Valve의 또 하나 유명한 게임, 포탈(Portal)에 등장하는 블루 포탈과 오렌지 포탈!
 이것은 어떻게 구현되었을까요?
-살짝 스포일러를 할까요?
-거울과 마찬가지로, 포탈을 xz 평면으로 이동시키는 행렬을 찾음으로서 구현할 수 있습니다.
 
+살짝 스포일러를 할까요?
+거울과 마찬가지로, 포탈을 $xz$ 평면으로 이동시키는 행렬을 찾음으로서 구현할 수 있습니다.
+대신 거울은 원점으로 옮겼다 다시 원래 자리로 돌아가는 반면, 포탈은 반대쪽 포탈이 있는 장소로 이동해야 한다는 차이가 있지요.
+그리고 거울은 원점으로 이동한 다음 $-y$를 해서 면대칭을 만들어주는 반면, 포탈은 180도 회전을 해줘야 합니다.
+
+포탈의 원리를 스스로 생각해 보면서 수학 연습을 해보는 건 어떨까요?
 자세한 내용은 다음 글에서 뵙겠습니다.
