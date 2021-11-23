@@ -47,7 +47,17 @@ $y$축이 상승 하강 방향을 표현하는 축이라고 했을 때, 이 방�
 물론 이 방식대로 하면 큰 한계가 있습니다.
 물이나 거울의 표면이 정확하게 $xz$ 평면과 일치해야만 반사상의 위치가 정확합니다.
 
-`임의의 평면으로 반사를 구현한 영상`
+<p><div style='position:relative; padding-bottom:calc(61.01% + 44px)'>
+    <iframe
+        src='https://gfycat.com/ifr/DishonestBlindJellyfish'
+        frameborder='0'
+        scrolling='no'
+        width='100%'
+        height='100%'
+        style='position:absolute;top:0;left:0;'
+        allowfullscreen
+    ></iframe>
+</div></p>
 
 게리모드나 gta5에는 임의의 방향을 바라보는 거울이 등장합니다.
 이런 것은 어떻게 구현한 것일까요?
