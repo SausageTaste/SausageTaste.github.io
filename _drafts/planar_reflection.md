@@ -26,7 +26,7 @@ $$
     0 & -1 & 0 \\
     0 &  0 & 1 \\
 \end{bmatrix}
-\times 
+\times
 \begin{bmatrix}
     x \\
     y \\
@@ -73,7 +73,7 @@ $y$축이 상승 하강 방향을 표현하는 축이라고 했을 때, 이 방�
 이제 공간 전체를 거울을 기준으로 면대칭이 되도록 만드는 변환 행렬은 다음과 같이 구할 수 있습니다.
 
 $$
-M_{reflection} = A^{-1} \times 
+M_{reflection} = A^{-1} \times
 \begin{bmatrix}
     1 &  0 & 0 & 0 \\
     0 & -1 & 0 & 0 \\
@@ -132,7 +132,7 @@ $T$를 구하기 위해서는 평면 위의 아무 점 하나를 선택해 줍�
 그러면 T는 다음과 같습니다.
 
 $$
-T = 
+T =
 \begin{bmatrix}
     1 & 0 & 0 & -\alpha_x \\
     0 & 1 & 0 & -\alpha_y \\
@@ -145,27 +145,27 @@ $$
 그럴 때는 종이를 꺼내서 직접 계산을 해보면 한 방에 이해가 될 겁니다.
 
 $$
-T \times \bold{v} = 
+T \times \bold{v} =
 \begin{bmatrix}
     1 & 0 & 0 & -\alpha_x \\
     0 & 1 & 0 & -\alpha_y \\
     0 & 0 & 1 & -\alpha_z \\
     0 & 0 & 0 & 1 \\
-\end{bmatrix} 
+\end{bmatrix}
 \times
 \begin{bmatrix}
     v_x \\
     v_y \\
     v_z \\
     1 \\
-\end{bmatrix} 
+\end{bmatrix}
 =
 \begin{bmatrix}
     v_x -\alpha_x \\
     v_y -\alpha_y \\
     v_z -\alpha_z \\
     1 \\
-\end{bmatrix} 
+\end{bmatrix}
 $$
 
 실질적으로는 $\bold{v} - \bold{\alpha}$를 4x4 행렬로 표현한 것에 불과하죠.
@@ -179,7 +179,7 @@ $$
 
 xz 평면이 바라보고 있는 방향은 3차원 벡터로
 
-$$ n_{xz} = (0, 1, 0) $$
+$$ \bold{n}_{xz} = (0, 1, 0) $$
 
 입니다.
 다들 이미 아시겠지요?
@@ -190,26 +190,120 @@ $$ ax + by + cz + d = 0 $$
 
 여기서 평면이 바라보는 방향, 즉 법선 벡터는
 
-$$ n = (a, b, c) $$
+$$ \bold{n} = (a, b, c) $$
 
 처럼 구할 수 있지요.
 계산의 편의성을 위해 둘 다 길이를 1로 정규화(normalize) 해줍시다.
-$n_{xz}$은 이미 길이가 1이므로 $n$만 변환해 주면 되겠군요.
+$\bold{n}_{xz}$은 이미 길이가 1이므로 $\bold{n}$만 변환해 주면 되겠군요.
 
-$$ \hat{n} = \frac{n}{||n||} = (\frac{a}{\sqrt{a^2 + b^2 + c^2}}, \frac{b}{\sqrt{a^2 + b^2 + c^2}}, \frac{c}{\sqrt{a^2 + b^2 + c^2}}) $$
+$$ \hat{\bold{n}} = \frac{\bold{n}}{||\bold{n}||} = \frac{(a, b, c)}{\sqrt{a^2 + b^2 + c^2}} $$
 
 이 정도는 고등학교 기하와 벡터 시간에 배웠을 거라고 믿습니다!
 그럼 이제 $n_{xz}$랑 $\hat{n}$이 일치하도록 만들어 주는 회전을 찾으면 되겠네요.
 
 두 벡터 사이의 각도 $\theta$는 내적을 이용해 구할 수 있죠.
 
-$$ n_{xz} \cdot \hat{n} = \cos \theta $$
+$$ \bold{n}_{xz} \cdot \hat{\bold{n}} = \cos \theta $$
 
-$$ \theta = \arccos (n_{xz} \cdot \hat{n}) $$
+$$ \theta = \arccos (\bold{n}_{xz} \cdot \hat{\bold{n}}) $$
 
 그리고 회전축은 외적을 이용해 구할 수 있습니다.
 
-$$ axis = n_{xz} \times \hat{n} $$
+$$ \bold{a} = (a_x, a_y, a_z) = \bold{n}_{xz} \times \hat{\bold{n}} $$
 
 다 왔습니다!
 이제 $axis$를 회전축으로 하여 $\theta$만큼 온세상을 회전시켜 주면 됩니다.
+그런 행렬은 [이 글](https://www.euclideanspace.com/maths/geometry/rotations/conversions/angleToMatrix/index.htm)이 잘 설명하고 있으니 참고해 주세요.
+
+$$
+R =
+\cos \theta
+\begin{bmatrix}
+    1 & 0 & 0 \\
+    0 & 1 & 0 \\
+    0 & 0 & 1 \\
+\end{bmatrix}
++
+(1 - \cos \theta)
+\begin{bmatrix}
+    a_x a_x & a_x a_y & a_x a_z \\
+    a_x a_y & a_y a_y & a_y a_z \\
+    a_x a_z & a_y a_z & a_z a_z \\
+\end{bmatrix}
++
+\sin \theta
+\begin{bmatrix}
+    0    & -a_z & a_y  \\
+    a_z  & 0    & -a_x \\
+    -a_y & a_x  & 0    \\
+\end{bmatrix}
+$$
+
+이것을 결합하여 4x4 행렬로 만들어 줍니다.
+
+$$
+R =
+\begin{bmatrix}
+    (1 - \cos \theta) a_x a_x + \cos \theta      &  (1 - \cos \theta) a_x a_y - a_z \sin \theta  &  (1 - \cos \theta) a_x a_z + a_y \sin \theta  &  0 \\
+    (1 - \cos \theta) a_x a_y + a_z \sin \theta  &  (1 - \cos \theta) a_y a_y + \cos \theta      &  (1 - \cos \theta) a_y a_z - a_x \sin \theta  &  0 \\
+    (1 - \cos \theta) a_x a_z - a_y \sin \theta  &  (1 - \cos \theta) a_y a_z + a_x \sin \theta  &  (1 - \cos \theta) a_z a_z + \cos \theta      &  0 \\
+    0                  & 0                   & 0                   &  1 \\
+\end{bmatrix}
+$$
+
+엄청나게 복잡하네요.
+그래도 다행인 점은, 계산은 저희가 직접 할 필요는 없다는 점입니다.
+컴퓨터에게 시키면 되니까요.
+
+C++ 코드로는 다음과 같습니다.
+
+```cpp
+glm::mat4 roate_about_axis_1(const float radians, const glm::vec3& axis) {
+    glm::mat4 output{1};
+
+    const glm::vec3 axis_n = glm::normalize(axis);
+
+    const float c = cos(radians);
+    const float s = sin(radians);
+    const float t = 1.f - c;
+    const float x = axis_n.x;
+    const float y = axis_n.y;
+    const float z = axis_n.z;
+
+    output[0][0] = t*x*x + c;
+    output[1][0] = t*x*y - z*s;
+    output[2][0] = t*x*z + y*s;
+
+    output[0][1] = t*x*y + z*s;
+    output[1][1] = t*y*y + c;
+    output[2][1] = t*y*z - x*s;
+
+    output[0][2] = t*x*z - y*s;
+    output[1][2] = t*y*z + x*s;
+    output[2][2] = t*z*z + c;
+
+    return output;
+}
+
+
+glm::mat4 roate_about_axis_2(const float radians, const glm::vec3& axis) {
+    const glm::quat q = glm::angleAxis(radians, glm::normalize(axis));
+    return glm::mat4_cast(q);
+}
+```
+
+이러한 과정을 거치면 마침내 거울을 xz 평면으로 이동시키는 행렬 $A = R \times T$를 찾을 수 있습니다.
+가장 어려운 부분은 이제 끝났습니다!
+이제 워에서 설명한 대로 행렬 $A$를 이용만 하면 완벽한 거울 대칭의 상을 만들어낼 수 있습니다.
+
+# 다음은 포탈이다
+
+바라건데 이 글을 읽은 분들이 평면 반사에 사용되는 수학을 제대로 이해하셨을 것입니다.
+그렇다면 다음 단계로 넘어갈 준비가 되어 있습니다.
+
+하프라이프를 개발한 Valve의 또 하나 유명한 게임, 포탈(Portal)에 등장하는 블루 포탈과 오렌지 포탈!
+이것은 어떻게 구현되었을까요?
+살짝 스포일러를 할까요?
+거울과 마찬가지로, 포탈을 xz 평면으로 이동시키는 행렬을 찾음으로서 구현할 수 있습니다.
+
+자세한 내용은 다음 글에서 뵙겠습니다.
