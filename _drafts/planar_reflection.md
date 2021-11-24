@@ -63,6 +63,8 @@ $xz$ 평면을 기준으로 면대칭을 이루도록 뒤집어 주는 것입니
 거울의 높낮이 정도는 쉽게 옮길 수 있습니다만.
 전신거울처럼 비스듬하게 세운 거울은 구현할 수 없습니다.
 
+![mirror_in_gta5](https://steamuserimages-a.akamaihd.net/ugc/1817761489803604263/7522E83B7D17D392F4DDEC2D3B983448C503F817/?imw=5000&imh=5000&ima=fit&impolicy=Letterbox&imcolor=%23000000&letterbox=false)
+
 <p><div style='position:relative; padding-bottom:calc(61.01% + 44px)'>
     <iframe
         src='https://gfycat.com/ifr/DishonestBlindJellyfish'
