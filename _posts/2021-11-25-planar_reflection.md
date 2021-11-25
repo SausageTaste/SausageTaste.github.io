@@ -561,15 +561,29 @@ $$ M_{reflection} = A^{-1} F A = T^{-1} R^{-1} F R T $$
 하프라이프를 개발한 Valve의 또 하나 유명한 게임, 포탈(Portal)에 등장하는 블루 포탈과 오렌지 포탈!
 이것은 어떻게 구현되었을까요?
 
+<p><div style='position:relative; padding-bottom:calc(56.25% + 44px)'>
+    <iframe
+        scrolling='no'
+        width='100%'
+        height='100%'
+        style='position:absolute;top:0;left:0;'
+        src="https://www.youtube.com/embed/TluRVBhmf8w"
+        title="YouTube video player"
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen
+    ></iframe>
+</div></p>
+
 살짝 스포일러를 할까요?
 거울과 마찬가지로, 포탈을 $xz$ 평면으로 이동시키는 행렬을 찾음으로서 구현할 수 있습니다.
 대신 거울은 원점으로 옮겼다 다시 원래 자리로 돌아가는 반면, 포탈은 반대쪽 포탈이 있는 장소로 이동해야 한다는 차이가 있지요.
 그리고 거울은 원점으로 이동한 다음 $-y$를 해서 면대칭을 만들어주는 반면, 포탈은 180도 회전을 해줘야 합니다.
 그 외에도 $T$와 $R$을 구할 때 유의해야 할 점이 추가로 있군요.
 
-이 정도 힌트를 갖고 스스로 생각해 보는 건 어떨까요?
-나름 괜찮은 연습이 될 것 같네요.
-그럼, 다음 글에서 뵙겠습니다!
+이 정도면 힌트가 되었나요?
+포탈의 원리를 스스로 생각해 보는 것도 재밌는 연습이 될 것 같습니다.
+그럼, 다들 좋은 하루 보내길 바라며, 글은 여기서 마치겠습니다!
 
 # Ⅴ. 참고자료
 
