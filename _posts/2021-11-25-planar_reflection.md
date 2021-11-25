@@ -535,7 +535,25 @@ const glm::mat4 A = R * T;
 가장 어려운 부분은 이제 끝났습니다!
 이제 위에서 설명한 대로 반사 행렬을 $M_{reflection} = A^{-1}FA$처럼 만들면 완벽한 거울 대칭의 이미지를 만들 수 있습니다.
 
-공간 속의 각 점들을 변환하는 거에 대해서도 궁금하실 텐데요.
+<div style='position:relative; padding-bottom:calc(56.25% + 44px)'>
+    <iframe
+        src='https://gfycat.com/ifr/OccasionalMajorAndeancat'
+        frameborder='0'
+        scrolling='no'
+        width='100%'
+        height='100%'
+        style='position:absolute;top:0;left:0;'
+        allowfullscreen
+    ></iframe>
+</div>
+
+$$ M_{reflection} = T^{-1} R^{-1} F R T $$
+
+각 단계를 하나씩 하나씩 적용해 나가면 다음과 같은 모습이 됩니다.
+거울이 원점을 향해 움직인 뒤 공간 전체가 회전하며, 그다음 공간 전체가 반대로 뒤집힌 다음 원래대로 돌아갑니다.
+이렇게 변환된 공간의 모습을 그대로 거울의 표면에 오려 붙이면 완벽한 거울 반사상이 된다는 것은 저어어 위의 움짤에서 확인한 사항이니 여기서는 생략하겠습니다.
+
+이런 식으로 공간을 움직이게 하는 방법에 대해서도 궁금하실 텐데요.
 사실 그 주제는 글 5개로도 부족할 정도로 방대한 내용입니다.
 천천히 하나씩 체워 나가도록 할 예정입니다만.
 기다리기 힘드신 분은 [learnopengl.com](https://learnopengl.com/)에서 공부해보시는 걸 추천 드립니다.
