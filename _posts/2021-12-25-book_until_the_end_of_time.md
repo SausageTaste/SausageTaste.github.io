@@ -2,7 +2,7 @@
 layout: post
 title:  "독서감상문 : 엔드 오브 타임"
 comments: true
-use_math: true
+use_math: false
 ---
 
 브라이언 그린은 매우 훌륭한 물리학자입니다.
