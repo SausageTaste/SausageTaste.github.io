@@ -5,6 +5,8 @@ comments: true
 use_math: false
 ---
 
+![book_cover](https://img.ridicdn.net/cover/593000851/xxlarge?dpi=xxhdpi#1)
+
 브라이언 그린은 매우 훌륭한 물리학자입니다.
 그는 어려운 첨단 물리학 개념을 이해하기 쉽게 전달하는 실력이 뛰어납니다.
 제가 처음 그의 저서 ≪엘레건트 유니버스≫를 접했을 때 저는 수능 수학 4등급에 빛나는 **수포자**였는데요.
