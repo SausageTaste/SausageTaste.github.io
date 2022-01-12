@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "평면 반사(Planar reflection)의 원리"
+title:  "게임 엔진 평면 반사의 원리"
 comments: true
 use_math: true
 ---
