@@ -6,9 +6,12 @@ I remember in those days I spent weeks to figure out how to draw a simple rectan
 I was so excited when I finally managed to draw a rectangle with a bitmap texture on it.
 
 I had a lot of fun with Python and OpenGL.
-Check out my 2 Python projects on my GitHub profile.
-[This](https://github.com/SausageTaste/practiceOpenGL-FirstPerson) and [this](https://github.com/SausageTaste/escapeRoom).
-Epscially about the latter one, I'm kinda proud of it.
+These are 2 most remarkable ones.
+
+* [practiceOpenGL-FirstPerson](https://github.com/SausageTaste/practiceOpenGL-FirstPerson)
+* [escapeRoom](https://github.com/SausageTaste/escapeRoom)
+
+Second one is newer and more profound, so you might be interested in it.
 It has a basic map loading system, and a console panel.
 
 While I enjoyed programming in Python, I startetd think, I might as well try C++.
@@ -18,11 +21,12 @@ Before that, I was just a university student who majors economics.
 My degree had nothing to do with software development.
 But ever since I started to dig in C++, my dream have gotten to be a serious software engineer.
 
+Here are the source codes for two C++ game engine projects.
+
+* [Little-Ruler](https://github.com/SausageTaste/Little-Ruler), the OpenGL project
+* [Dalbaragi](https://github.com/SausageTaste/Dalbaragi), the Vulkan project
+
 # The OpenGL Projects
-
-[Little-Ruler](https://github.com/SausageTaste/Little-Ruler)
-
-[Dalbaragi](https://github.com/SausageTaste/Dalbaragi)
 
 It is a cross platform game engine.
 It supports Windows, Linux, and Android.
@@ -67,6 +71,29 @@ Though I have some more challanges such as Android App Bundles, and supporting s
 I belive these are just matters of time.
 
 # In-house Model Format
+
+There are some skeletal animation tutorials on the internet.
+YouTube series by ThinMatrix was really great, as well as some good blog posts.
+But what I really didn't like was they used Collada file format.
+
+It's not bad.
+The model files these tutorials provided with was working great with it.
+I could see the correctly animated scenes.
+
+But when I tried to import my own animted models from blender to my game engine, it didn't work out so well.
+Weirdly streched limbs, some body parts being sucked into world space origin point, character lying on the ground...
+Bugs I had to deal with.
+
+But I didn't understand how Collada file stores animations, how they implement the animation system in the tutorials.
+Of course, because I just copy-pasted everything!
+
+It was another moment when I ceased the project about a month.
+Such a frustrating moment.
+
+I thought maybe I could study basic linear algebra and build the entire animation system by myself.
+During the 1 month breaking time, I never opened Visual Studio.
+Only a pen and a paper, and a book of math.
+It's when I came up with a brilliant idea that helped understanding space transformation.
 
 # Map Building With Blender
 
