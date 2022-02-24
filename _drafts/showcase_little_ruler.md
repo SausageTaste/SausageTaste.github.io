@@ -18,7 +18,11 @@ Before that, I was just a university student who majors economics.
 My degree had nothing to do with software development.
 But ever since I started to dig in C++, my dream have gotten to be a serious software engineer.
 
-# What is this project
+# The OpenGL Projects
+
+[Little-Ruler](https://github.com/SausageTaste/Little-Ruler)
+
+[Dalbaragi](https://github.com/SausageTaste/Dalbaragi)
 
 It is a cross platform game engine.
 It supports Windows, Linux, and Android.
@@ -29,4 +33,49 @@ The program architecture might not so beautiful and the performance is pretty ba
 But I'm certain I've learned a lot of stuff while working on this project.
 This post is summarizing it.
 
-# 
+# Cross Platform
+
+When I first started `Little-Ruler` project, supporting Android platform was very important.
+Because under a law of South Korea, your game must be distributed via authorized 'open markets' to avoid examination expenditure.
+Those 'open markets' include Google Play Store.
+So if I had any plan to release a real game on a market, I had no other choice but releasing on Android platform.
+Later I found out Epic Games Store was also an open market but that's another story.
+
+Anyways, that's why I decided to spent remakrable time and efforts to study NDK build system.
+
+Basically Android uses Java for building applications.
+But when you need to integrate C/C++ into your project, you can use JNI feature to call C functions in Java code.
+You use NDK to build your C/C++ project and produce a `.so` file, to which JNI can link.
+
+It wan't a easy to learn the toolset because it wasn't a common practice.
+Most mobile game developers just use Unity engine or something.
+NDK user pool was small, so support from Google was not so good, and the lack of tutorials/resources was killing me.
+It was all on my own.
+If I failed, the project stopped.
+
+Sometimes I was like "Screw this. I'm done." and did something else for days, or for weeks.
+Android Studio has always been my biggest cancer since then.
+Even Vulkan doesn't compare.
+
+But the peculier thing is that, after some refreshing breaks, I always come up with solutions, or more precisely, run into ones.
+Maybe Google fixed it, or I was just too frustrated to focus on finding flaws.
+Either ways, I always solved problems, and it was one of the most satisfying moments.
+
+Everything I've learned from the process is still used in `Dalbaragi` project.
+At this point I'm fairly comfortable with NDK build system.
+Though I have some more challanges such as Android App Bundles, and supporting sound and network on mobile devices.
+I belive these are just matters of time.
+
+# In-house Model Format
+
+# Map Building With Blender
+
+# Text Rendering
+
+# Collision Resolve
+
+# Vulkan
+
+# Planar Reflection
+
+# Portal
