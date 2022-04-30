@@ -78,6 +78,7 @@ GEM
 
 PLATFORMS
   aarch64-linux
+  x64-mingw-ucrt
   x64-mingw32
 
 DEPENDENCIES
