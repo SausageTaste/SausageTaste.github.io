@@ -27,7 +27,7 @@ layout: default
   </header>
 
   <div class="post-content e-content" itemprop="articleBody">
-    {{ content | replace: "\[", "ma-th" | replace: "\]", "ma-th" }}
+    {{ content | replace: "\[", "<div style='overflow-x: auto;'> ma-th" | replace: "\]", "ma-th </div>" }}
   </div>
 
   {%- if site.disqus.shortname -%}
