@@ -11,6 +11,8 @@ I live in Seoul, South Korea.
 I'm a student in Dongguk university.  
 <woos8899@gmail.com>
 
+[PGP Public Key](/assets/files/Sungmin%20Woo%20(High%20Security)_0x27419E96_public.asc)
+
 ## Languages
 
 I'm fluent in **Korean**.  
