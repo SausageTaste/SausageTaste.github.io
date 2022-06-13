@@ -231,7 +231,7 @@ $$
 
 $0(1-r)^0$ 이것이 0이 된다는 것은 명백해 보입니다만.
 $\lim_{k \to \infty} k(1-r)^k$ 이 부분은 쉽지가 않네요.
-[로피탈의 법칙](https://m.blog.naver.com/PostView.naver?isHttpsRedirect=true&blogId=junhyuk7272&logNo=221517433285)을 사용할 때입니다.
+[로피탈의 법칙](https://tutorial.math.lamar.edu/classes/calci/lhospitalsrule.aspx#:~:text=So%2C%20L'Hospital's%20Rule%20tells,and%20then%20take%20the%20limit.)을 사용할 때입니다.
 
 
 $$
@@ -273,6 +273,8 @@ $$
 
 $$ \lambda = 6 \alpha + 5 \beta \\ $$
 
+### 4. 정리
+
 엄청나게 멀고 험한 길을 헤쳐왔는데 마지막에 얻게 되는 결과물이 이리도 단순하다니.
 이것이 바로 수학의 아름다움 아니겠습니까?
 
@@ -311,3 +313,24 @@ $$
 $$
 
 24만 8500테라가 드는군요.
+
+# Ⅲ. 후기
+
+저는 과금을 하지 않고 레압을 맞추기로 계획을 세웠습니다.
+그런데 하루에 벌 수 있는 인게임 돈의 양이 대체로 일정한 상황에서, 며칠이 지나야 레압을 다 맞출 수 있을지 계산해 보고 싶었습니다.
+그래서 처음에는 그냥 C++를 사용해 백만 번 시뮬레이션 돌리는 방식으로 구할려고 했었는데요.
+
+그런데 함수를 하나씩 정의하는 과정에서 문득 영감이 떠오르더군요.
+함수에 시그마 summation이 많이 나오는데, 이것을 analytic 함수로 만들 방법이 존재한다면?
+CPU를 혹사시키는 무식한 시뮬레이션을 할 필요가 없지 않을까?
+
+OpenGL이나 Vulkan의 shader를 작성할 때도, BRDF나 atmospheric scattering을 구현할 때 최대한 numerical integration을 피할 수 있다면 유능한 개발자입니다.
+저도 더 유능한 개발자가 되고 싶은 입장에서, 수학의 힘을 통해 최적화하는 경험을 한 번 해보고 싶었습니다.
+그래서 고등학교 수학책도 펴보고 위키백과도 보면서, 맨땅에 헤딩 하듯 도전해 봤습니다.
+
+결과적으로 굉장히 아름답고 단순명료한 수식을 얻게 되어 기쁩니다.
+
+# Ⅳ. 참고자료
+
+* [위키백과 Summation 문서](https://en.wikipedia.org/wiki/Summation?oldformat=true#Summation_index_in_exponents)
+* [Paul's Online Notes](https://tutorial.math.lamar.edu/classes/calci/lhospitalsrule.aspx#:~:text=So%2C%20L'Hospital's%20Rule%20tells,and%20then%20take%20the%20limit.)
