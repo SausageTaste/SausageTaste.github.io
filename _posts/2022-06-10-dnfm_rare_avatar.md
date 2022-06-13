@@ -130,6 +130,7 @@ $$
 이 공식에서 $k = \infty$, 그리고 $x = (1-r)$로 두면 풀 수 있겠군요.
 
 $$
+\begin{equation} \label{}
 \begin{split}
 \sum_{n=1}^{\infty} P_n & = \sum_{n=1}^{\infty} (1-r)^{n-1} r \\
                         & = r \sum_{n=1}^{\infty} (1-r)^{n-1} \\
@@ -137,6 +138,7 @@ $$
                         & = r \frac{1}{1-1+r} \\
                         & = \frac{r}{r} = 1 \\
 \end{split}
+\end{equation}
 $$
 
 $(1-r)^{\infty}$의 경우, $r$은 $0 < r < 1$을 만족하기 때문에 무한으로 곱하면 0으로 수렴합니다.
@@ -173,49 +175,100 @@ $$ \lambda = \sum_{n = 1}^{\infty} P_nT_n = \sum_{n = 1}^{\infty} [(\alpha + \be
 
 이걸 계산해야 합니다.
 여기서 머리가 슬슬 아파오기 시작합니다만.
+한번 해봅시다!
 
-좋은 소식이 있습니다!
-우리가 명심해야 할 것은, 이것은 수능 공부가 아니라는 사실입니다.
-그렇죠, 컴퓨터를 사용하면 되죠!
-[WolframAlpha](https://www.wolframalpha.com/input?i=sum+%28%28A%2BB%29*n+%2B+A%29%281-r%29%5E%28n-1%29*r%2C+n%3D1+to+infinity)라는 공대생들의 영원한 친구를 사용하면 쉽게 해결할 수 있습니다.
-
-![wolframalpha_dnfm_sum](/assets/images/misc_01/wolframalpha_dnfm_sum.png)
-
-감사합니다 Computer!
-
-울프람 형님이 보여준 것을 그대로 써보면 다음과 같습니다.
-
-$$ \lambda = \sum_{n = 1}^{\infty} [(\alpha + \beta)n + \alpha](1-r)^{n-1}r = \frac{-\alpha r^2 + \alpha - \beta r + \beta}{(1-r)r} $$
-
-$$ when \ \left| \frac{-r \alpha + \alpha + \beta - \beta r}{\alpha + \beta} \right| < 1 $$
-
-근데 가만히 보면 저 식도 더 정리를 할 여지가 있어 보입니다.
-그래서 바로 종이를 꺼내서 계산해 봤습니다.
-그러면 다음과 같이 간단해집니다.
+일단 식을 최대한 분리해 보겠습니다.
 
 $$
 \begin{split}
-\frac{-\alpha r^2 + \alpha - \beta r + \beta}{(1-r)r} & = \frac{\alpha(-r^2 + 1) + \beta(-r + 1)}{(1-r)r} \\
-                                  & = \frac{\alpha(1+r)(1-r) + \beta(1-r)}{(1-r)r} \\
-                                  & = \frac{\alpha(1+r) + \beta}{r} \\
+\lambda &= \sum_{n = 1}^{\infty} \left[ (\alpha + \beta)n(1-r)^{n-1}r + \alpha (1-r)^{n-1}r \right] \\
+        &= \sum_{n = 1}^{\infty} (\alpha + \beta)n(1-r)^{n-1}r + \sum_{n = 1}^{\infty} \alpha(1-r)^{n-1}r \\
+        &= (\alpha + \beta)\frac{r}{1-r} \sum_{n = 1}^{\infty} n(1-r)^n + \alpha r \sum_{n = 1}^{\infty} (1-r)^{n-1} \\
 \end{split}
 $$
+
+여기서 두 번째 항은 아까 **식 (1)**에서 아디오스를 외쳤을 때 이미 계산을 끝내 놓았죠?
 
 $$
 \begin{split}
-\left| \frac{-r \alpha + \alpha + \beta - \beta r}{\alpha + \beta} \right| & = \left| \frac{-r(\alpha + \beta) + (\alpha + \beta)}{(\alpha + \beta)} \right| \\
-                                              & = \left| \frac{-r + 1}{1} \right| \\
-                                              & = \left| 1 - r \right| \\
+r \sum_{n=1}^{\infty} (1-r)^{n-1} & = \frac{r}{r} \\
+  \sum_{n=1}^{\infty} (1-r)^{n-1} & = \frac{1}{r} \\
 \end{split}
 $$
 
-정리하자면 다음과 같이 됩니다.
+이를 적용하면 다음과 같이 사라지게 됩니다.
 
-$$ \lambda = \frac{\alpha(r+1) + \beta}{r} $$
+$$
+\begin{equation} \label{}
+\begin{split}
+\lambda & = (\alpha + \beta)\frac{r}{1-r} \sum_{n = 1}^{\infty} n(1-r)^n + \alpha r \left[ \sum_{n = 1}^{\infty} (1-r)^{n-1} \right] \\
+        & = (\alpha + \beta)\frac{r}{1-r} \sum_{n = 1}^{\infty} n(1-r)^n + \alpha r \left[ \frac{1}{r} \right] \\
+        & = (\alpha + \beta)\frac{r}{1-r} \sum_{n = 1}^{\infty} n(1-r)^n + \alpha \\
+\end{split}
+\end{equation}
+$$
 
-$$ when \ \left| 1-r \right| < 1 $$
+이제 첫번째 항만 풀면 되겠군요.
+이번에는 아까 위키백과에 있는 공식 중 이것을 사용합니다.
 
-$r$은 확률이므로 당연히 $0 < r < 1$을 만족할 것이므로 저 조건부는 신경쓸 필요가 없습니다.
+$$
+\begin{split}
+\sum_{n=0}^{k-1}nx^n & = \frac{x - kx^k + (k - 1)x^{k+1}}{(1 - x)^2}
+\end{split}
+$$
+
+$n(1-r)^n$의 형태는 딱 들어맞아서 다행이기는 한데, 시작 숫자와 끝 숫자가 달라서 그대로 적용하기는 힘들겠군요.
+그러니 **식 (2)**의 첫번째 항 일부분을 좀 변형해준 다음 공식을 적용하도록 하겠습니다.
+
+$$
+\begin{equation} \label{}
+\begin{split}
+\sum_{n = 1}^{\infty} n(1-r)^n & = \sum_{n = 0}^{\infty - 1} n(1-r)^n - \sum_{n = 0}^{0} n(1-r)^n + \sum_{n = \infty}^{\infty} n(1-r)^n \\
+                               & = \lim_{k \to \infty} \frac{(1-r) - k(1-r)^k + (k - 1)(1-r)^{k+1}}{[1 - (1-r)]^2} + 0(1-r)^0 + \lim_{k \to \infty} k(1-r)^k \\
+\end{split}
+\end{equation}
+$$
+
+$0(1-r)^0$ 이것이 0이 된다는 것은 명백해 보입니다만.
+$\lim_{k \to \infty} k(1-r)^k$ 이 부분은 쉽지가 않네요.
+[로피탈의 법칙](https://m.blog.naver.com/PostView.naver?isHttpsRedirect=true&blogId=junhyuk7272&logNo=221517433285)을 사용할 때입니다.
+
+
+$$
+\begin{split}
+\lim_{k \to \infty} k(1-r)^k &= \lim_{k \to \infty} \frac{k}{(1-r)^{-k}} \\
+                             &= \lim_{k \to \infty} \frac{(k)'}{[(1-r)^{-k}]'} \\
+                             &= \lim_{k \to \infty} \frac{1}{(1-r)^{-k} \ln (1-r) (-1)} \\
+                             &= \frac{1}{\infty} \\
+                             &= 0 \\
+\end{split}
+$$
+
+0이 되어 사라지는군요!
+$\lim_{k \to \infty} (k - 1)(1-r)^{k+1}$도 계산해 보면 마찬가지의 결과가 나옵니다.
+이제 **식 (3)**를 완전히 풀 수 있습니다.
+
+$$
+\begin{split}
+\sum_{n = 1}^{\infty} n(1-r)^n =& \lim_{k \to \infty} \frac{(1-r) - k(1-r)^k + (k - 1)(1-r)^{k+1}}{[1 - (1-r)]^2} &+ 0(1-r)^0 &+ \lim_{k \to \infty} k(1-r)^k \\
+                               =& \frac{(1-r) - 0 + 0}{[1 - (1-r)]^2}                                             &+ 0        &+ 0 \\
+                               =& \frac{1-r}{r^2} \\
+\end{split}
+$$
+
+이걸 그대로 갖고 가서 **식 (2)**에 붙여넣으면 끝입니다.
+
+$$
+\begin{split}
+\lambda &= (\alpha + \beta)\frac{r}{1-r} \left[ \sum_{n = 1}^{\infty} n(1-r)^n \right] + \alpha \\
+        &= (\alpha + \beta)\frac{r}{1-r} \left[ \frac{1-r}{r^2} \right] + \alpha \\
+        &= (\alpha + \beta)\frac{1}{r} + \alpha \\
+        &= \frac{\alpha + \beta}{r} +\frac{r \alpha}{r} \\
+        &= \frac{\alpha(r+1) + \beta}{r}
+\end{split}
+$$
+
+처음 예상했던 것보다 엄청 단순한 형태로 정리되었네요.
 여기서 $r=0.2$라는 점을 반영하면 $\lambda$ 식이 더더욱 간단해집니다.
 
 $$ \lambda = 6 \alpha + 5 \beta \\ $$
@@ -225,6 +278,7 @@ $$ \lambda = 6 \alpha + 5 \beta \\ $$
 
 $$ \sum_{n = 1}^{\infty} [(\alpha + \beta)n + \alpha](1-0.2)^{n-1}0.2 = 6 \alpha + 5 \beta $$
 
+좌변의 식을 최적화하고 압축해서 우변처럼 만드는 데 성공했습니다.
 우리는 마침내 이 복잡했던 식을 오직 두 번의 곱셈과 한 번의 덧셈으로 압축하고, 그것이 올바른 결과를 도출할 수 있다는 것을 증명했습니다.
 계산하기도 쉽고, 외우기도 쉽지요.
 
