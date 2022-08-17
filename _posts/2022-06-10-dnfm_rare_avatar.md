@@ -223,8 +223,8 @@ $n(1-r)^n$의 형태는 딱 들어맞아서 다행이기는 한데, 시작 숫�
 $$
 \begin{equation} \label{}
 \begin{split}
-\sum_{n = 1}^{\infty} n(1-r)^n & = \sum_{n = 0}^{\infty - 1} n(1-r)^n - \sum_{n = 0}^{0} n(1-r)^n + \sum_{n = \infty}^{\infty} n(1-r)^n \\
-                               & = \lim_{k \to \infty} \frac{(1-r) - k(1-r)^k + (k - 1)(1-r)^{k+1}}{[1 - (1-r)]^2} + 0(1-r)^0 + \lim_{k \to \infty} k(1-r)^k \\
+\sum_{n = 1}^{\infty} n(1-r)^n & = \sum_{n = 0}^{\infty - 1} n(1-r)^n &- \sum_{n = 0}^{0} n(1-r) &+ \sum_{n = \infty}^{\infty} n(1-r)^n \\
+                               & = \lim_{k \to \infty} \frac{(1-r) - k(1-r)^k + (k - 1)(1-r)^{k+1}}{[1 - (1-r)]^2} &- 0(1-r)^0 &+ \lim_{k \to \infty} k(1-r)^k \\
 \end{split}
 \end{equation}
 $$
@@ -237,7 +237,7 @@ $\lim_{k \to \infty} k(1-r)^k$ 이 부분은 쉽지가 않네요.
 $$
 \begin{split}
 \lim_{k \to \infty} k(1-r)^k &= \lim_{k \to \infty} \frac{k}{(1-r)^{-k}} \\
-                             &= \lim_{k \to \infty} \frac{(k)'}{[(1-r)^{-k}]'} \\
+                             &= \lim_{k \to \infty} \frac{ \frac{d}{dk} k}{ \frac{d}{dk} (1-r)^{-k} } \\
                              &= \lim_{k \to \infty} \frac{1}{(1-r)^{-k} \ln (1-r) (-1)} \\
                              &= \frac{1}{\infty} \\
                              &= 0 \\
