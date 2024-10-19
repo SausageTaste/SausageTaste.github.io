@@ -26,7 +26,12 @@ layout: default
       {%- endif -%}</p>
   </header>
 
-  <div class="post-content e-content" itemprop="articleBody">
+  {%- if page.justify -%}
+    <div class="post-content e-content" itemprop="articleBody" style="text-align: justify;">
+  {%- else -%}
+    <div class="post-content e-content" itemprop="articleBody">
+  {%- endif -%}
+
     {{ content | replace: "\[", "<div style='overflow-x: auto;'> ma-th" | replace: "\]", "ma-th </div>" }}
   </div>
 

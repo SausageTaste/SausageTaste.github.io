@@ -3,6 +3,7 @@ layout: post
 title:  "독서감상문 : 지리의 힘"
 use_math: false
 comments: true
+justify: true
 ---
 
 ![book_cover](https://img.ridicdn.net/cover/1014000010/xxlarge)

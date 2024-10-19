@@ -3,6 +3,7 @@ layout: post
 title:  "독서감상문 : 엔드 오브 타임"
 comments: true
 use_math: false
+justify: true
 ---
 
 ![book_cover](https://img.ridicdn.net/cover/593000851/xxlarge?dpi=xxhdpi#1)

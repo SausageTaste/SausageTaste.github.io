@@ -3,6 +3,7 @@ layout: post
 title:  "게임이 반사를 구현하는 방법"
 comments: true
 use_math: true
+justify: true
 ---
 
 # Ⅰ. 서론

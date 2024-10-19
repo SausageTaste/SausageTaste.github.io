@@ -3,6 +3,7 @@ layout: post
 title:  "던파M 레압 맞추는 기대 비용은 얼마일까?"
 use_math: true
 comments: true
+justify: true
 ---
 
 # Ⅰ. 결론

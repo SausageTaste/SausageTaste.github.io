@@ -3,6 +3,7 @@ layout: post
 title:  "독서감상문 : 소모되는 남자"
 comments: true
 use_math: false
+justify: true
 ---
 
 이 책은 읽기가 매우 수월했습니다.

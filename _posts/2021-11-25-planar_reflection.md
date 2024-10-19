@@ -3,6 +3,7 @@ layout: post
 title:  "게임 엔진 평면 반사의 원리"
 comments: true
 use_math: true
+justify: true
 ---
 
 지난번 포스트 ‘[게임이 반사를 구현하는 방법](/2021/07/14/cg_reflections.html)’에서 반사 효과를 구현하는 다양한 기술에 대해 간단히 살펴보았었는데요.
