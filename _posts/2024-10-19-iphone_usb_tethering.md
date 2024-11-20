@@ -30,11 +30,11 @@ When we need Internet and it doesn't violate any security policy, one can just
 bring their phone and turn on mobile Hot Spot or Tethering.
 If the computer has Wi-Fi reciever then Hot Spot would work ok, or else get a
 C-to-A or C-to-C USE cable and connect the phone to the computer.
-Then activate USE tethering on your phone.
+Then activate USB tethering on your phone.
 That's all!
-Only for Android phone users, I guess.
+Only for Android phone users, though.
 
-My fellow workers who use Android phone simply does that.
+My fellow workers who use Android phone simply do that.
 So when I need Internet, I often ask them to please allow me to use your mobile
 data.
 That's a shame, because iPhone does not offer this easy USB Tethering option.
