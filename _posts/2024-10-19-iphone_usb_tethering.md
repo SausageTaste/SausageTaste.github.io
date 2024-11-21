@@ -57,10 +57,9 @@ Ignore the button and scroll down a bit and You'll see
 
 Click *Windows* and you can get executable installer just like the old days.
 Or download it [here for 64 bit](https://www.apple.com/itunes/download/win64) or
-[here for 32 bit](https://www.apple.com/itunes/download/win32) in case you fully
-trust me.
-Always be cautious when you download anything from unknown sources. (which is,
-for now, me)
+[here for 32 bit](https://www.apple.com/itunes/download/win32).
+Always be cautious when you download anything from unknown sources.
+You can trust me though, definately!
 
 Once the installer file is downloaded, you can extract it with 7zip or WinRAR.
 
@@ -76,26 +75,18 @@ The above method is what most blog posts suggest if you search on Google.
 I guess they all tested it on Internet available environment, where Windows OS
 can automatically get and install device drivers from Internet.
 
-For me, it was not possible because Internet was not an option, when this [Apple
-community post](https://discussions.apple.com/thread/255478610) came into my
-sight.
-
-The author provides with two links that directly download some `cab` files.
-(Always be cautious!!)
-You can extract those as well.
-There is a `inf` file in each `cab` file that
-you need to install by right clicking it.
+For me, it was not possible because Internet was not an option, when this [Apple community post](https://discussions.apple.com/thread/255478610) came into my sight.
+The author provide with convenient links to download `cap` files, which you may decompress and get driver installer files.
 
 I'll leave the direct download links here.
 * [Apple USB Drivers](https://catalog.s.download.windowsupdate.com/d/msdownload/update/driver/drvs/2020/11/01d96dfd-2f6f-46f7-8bc3-fd82088996d2_a31ff7000e504855b3fa124bf27b3fe5bc4d0893.cab)
 * [Apple Tether USB Drivers](https://catalog.s.download.windowsupdate.com/c/msdownload/update/driver/drvs/2017/11/netaapl_7503681835e08ce761c52858949731761e1fa5a1.cab)
 
-I tried them myself on disconnected Windows computer and it worked!
-I didn't need to call my coworkers anymore.
+If you are like me, you might find it uneasing to blindlessly download from a random link provided by a random person on Apple community.
+I want to get those files from official source.
+So I did some research.
 
-It seems the original author downloaded the driver files from
-[Microsoft Update Catalog](https://www.catalog.update.microsoft.com/Search.aspx?q=apple%20usb)
-but I'm not sure because I didn't tested it myself.
+[Microsoft Update Catalog](https://www.catalog.update.microsoft.com/Search.aspx?q=apple%20usb) it the place to go.
 If you don't trust a random Apple community user, and want to get the file
 directly from Microsoft, please try this ones.
 You can search for 'Apple USB' and 'Apple Net' to get same files.
