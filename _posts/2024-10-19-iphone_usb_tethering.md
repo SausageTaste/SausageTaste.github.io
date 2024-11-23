@@ -72,23 +72,19 @@ Now the tethering should work, or... does it?
 # Install Device Driver
 
 The above method is what most blog posts suggest if you search on Google.
-I guess they all tested it on Internet available environment, where Windows OS
-can automatically get and install device drivers from Internet.
+Unfortunately it didn't work for me.
+I checked Windows services app to make sure the Apple Mobile Device service was running, and even tried restarting it but nothing changed.
 
-For me, it was not possible because Internet was not an option, when this [Apple community post](https://discussions.apple.com/thread/255478610) came into my sight.
-The author provide with convenient links to download `cap` files, which you may decompress and get driver installer files.
+I did minutes of googling and ran into an [Apple community post](https://discussions.apple.com/thread/255478610) that addresses this problem.
+Turned out, I was ought to install 2 additional drivers.
+The author provides with convenient links to download `cap` files, which you may decompress and get driver installer files.
 
-I'll leave the direct download links here.
-* [Apple USB Drivers](https://catalog.s.download.windowsupdate.com/d/msdownload/update/driver/drvs/2020/11/01d96dfd-2f6f-46f7-8bc3-fd82088996d2_a31ff7000e504855b3fa124bf27b3fe5bc4d0893.cab)
-* [Apple Tether USB Drivers](https://catalog.s.download.windowsupdate.com/c/msdownload/update/driver/drvs/2017/11/netaapl_7503681835e08ce761c52858949731761e1fa5a1.cab)
+The above method worked perfectly and I was happy with that, except for the fact that I had downloaded files from unknown sources.
+I settled with that at that time because I was so busy working on my programming that I cannot waste any more time on top of the all the efforts that it had taken to get the USB tethering working.
+Later, once the job had been done, I decided to dig in to find a reliable download link for those files.
 
-If you are like me, you might find it uneasing to blindlessly download from a random link provided by a random person on Apple community.
-I want to get those files from official source.
-So I did some research.
-
-[Microsoft Update Catalog](https://www.catalog.update.microsoft.com/Search.aspx?q=apple%20usb) it the place to go.
-If you don't trust a random Apple community user, and want to get the file
-directly from Microsoft, please try this ones.
+[Microsoft Update Catalog](https://www.catalog.update.microsoft.com/Search.aspx?q=apple%20usb) is the place to go.
+It's the properly signed official web site running by Microsoft.
 You can search for 'Apple USB' and 'Apple Net' to get same files.
 
 # Conclusion
