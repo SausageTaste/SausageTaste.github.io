@@ -87,6 +87,27 @@ Later, once the job had been done, I decided to dig in to find a reliable downlo
 It's the properly signed official web site running by Microsoft.
 You can search for 'Apple USB' and 'Apple Net' to get same files.
 
+![download_apple_usb](/assets/images/misc_01/download_apple_usb.jpg)<br>
+
+Search `apple usb` and download the highlighted entry.
+
+![download_apple_net](/assets/images/misc_01/download_apple_net.jpg)<br>
+
+Search `apple net` and download it as well.
+
+![extractdecompress_cab_files_itunes](/assets/images/misc_01/decompress_cab_files.png)<br>
+
+Then you can decompress them like you did with iTunes installer file.
+
+![install_inf_file](/assets/images/misc_01/install_inf_file.png)<br>
+
+You will get two folders afterward, each of which contains a `.inf` file.
+Install `AppleKIS.inf` and `netaapl.Inf` respectively by right clicking.
+
+Now that you installed all 3 progams, *Apple Mobile Device Service*, *Apple USBDevice driver*, and *Apple Net driver*, we are all set!
+Restart your Windows and the whole world is yours.
+Simply logging out and logging in again works as well, if you know what I mean.
+
 # Conclusion
 
 The reason why I'm writing post is weird.
