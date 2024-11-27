@@ -97,12 +97,11 @@ Search `apple net` and download it as well.
 
 ![extractdecompress_cab_files_itunes](/assets/images/misc_01/decompress_cab_files.png)<br>
 
-Then you can decompress them like you did with iTunes installer file.
-
-![install_inf_file](/assets/images/misc_01/install_inf_file.png)<br>
-
+Then you can decompress them in the same way you did with iTunes installer file.
 You will get two folders afterward, each of which contains a `.inf` file.
 Install `AppleKIS.inf` and `netaapl.Inf` respectively by right clicking.
+
+![install_inf_file](/assets/images/misc_01/install_inf_file.png)<br>
 
 Now that you installed all 3 progams, *Apple Mobile Device Service*, *Apple USBDevice driver*, and *Apple Net driver*, we are all set!
 Restart your Windows and the whole world is yours.
