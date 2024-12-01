@@ -2,7 +2,7 @@
 layout: post
 title:  "iPhone USB tethering on Windows PC"
 use_math: false
-comments: false
+comments: true
 ---
 
 > In a nutshell, install those Apple device drivers:
