@@ -1,12 +1,23 @@
-https://sausagetaste.github.io/
+# What is this?
 
-# How to run the server in local network
+It’s my blog!
 
-Follow instructions from [official Jekyll documentations](https://jekyllrb.com/docs/installation/#requirements)
+Visit https://sausagetaste.github.io/ to read some posts and maybe leave a comment.
 
-* Install Ruby [here](https://www.ruby-lang.org/en/downloads/)
-* Run `gem install jekyll bundler` on terminal
-* Run following commands on terminal with this project directory as cwd
-    * `bundle install` (only once)
-    * `bundle exec jekyll serve --watch --drafts` (everytime you want to start the server)
-* Now that the server is running, you can open a web browser and connect to `http://localhost:4000`
+# How to run the server locally
+
+* Install Ruby by following the [Jekyll installation documentation](https://jekyllrb.com/docs/installation/).
+* Open a terminal and install dependencies:
+
+```bash
+gem install jekyll bundler
+cd <repo_root>  # Replace with your local repository path
+bundle install
+```
+* Start the Jekyll server:
+
+```bash
+bundle exec jekyll serve --watch --drafts
+```
+
+* Open http://localhost:4000 in your browser to view the site.
