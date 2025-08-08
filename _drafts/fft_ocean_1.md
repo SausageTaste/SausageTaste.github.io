@@ -16,3 +16,8 @@ Yeah it was total rewrite and I think it was worth it.
 Check out some visuals.
 
 > Insert YouTube videos
+
+Atmospheric scattering being demonstrated gorgeously.
+
+It wasn't too hard to implement because the researcher published demo source code so I could simply copy/paste its core logic, figure out correct input/output variables, and set up Vulkan render passes.
+
