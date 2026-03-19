@@ -1,19 +1,22 @@
 ---
 layout: post
-title:  "How to Render an Ocean - Tessendorf Ocean"
+title:  "게임이 바다를 구현하는 방법 - Tessendorf Ocean"
 comments: false
 use_math: true
 ---
 
-It's been awhile since I last wrote a blog on computer graphics.
-Ever since I graduated from university, it's been a tough time finding a job and getting used to the new routine.
-Now that I'm settled and feel stable, I'll start writing again!
+마지막으로 블로그를 쓴 이후 꽤 많은 시간이 지났네요.
+그동안 취업도 하고, Vulkan 공부도 하고, 최근에는 AI도 이것저것 써보면서 밀도 있는 시간을 보내고 있었습니다.
+그리고 몇 주 전에 처음으로 맥북을 사봤는데요.
+이제는 윈도우 데스크탑보다 더 많이 쓸 정도가 됐습니다.
 
-Recently I've been working on a cool stuff.
-A new Vulkan rendering engine project [mirinae](https://github.com/SausageTaste/mirinae) is here, and [Dalbaragi Engine](https://github.com/SausageTaste/dalbaragi) has become history.
-It was total rewrite and I think it was worth it.
+스타벅스 입장권을 들고 카페에 가서 할 만한 활동이 뭐가 있나 고민하던 차에 이 블로그가 다시 떠오르더군요.
+그래서 오랜만에 다시 글을 써볼까 합니다. ㅋㅋ
 
-Check out some visuals.
+제 Vulkan 렌더링 엔진인 [mirinae](https://github.com/SausageTaste/mirinae)를 만들면서 굉장히 재밌는 도전을 해봤습니다.
+바로 끝없이 펼쳐진 바다 만들기죠!
+
+우선 영상부터 보실까요?
 
 <p><div style='position:relative; padding-bottom:calc(56.25% + 44px)'>
     <iframe
@@ -29,59 +32,71 @@ Check out some visuals.
     ></iframe>
 </div></p>
 
-Many thanks to ThinMatrix for the cute player character model!
+어때요, 멋지죠?
+언리얼, 유니티 엔진의 도움 없이 오직 Vulkan만으로 만들었습니다.
+그렇기 때문에 저는 이 장관을 만들어내기 위해 필요한 기술들을 속속들이 알고 있습니다.
+복잡한 수학 공식, 푸리에 변환, 컴퓨트 셰이더 등등.
 
-Anyways, this is the Tessendorf ocean that I've been working on for weeks.
-You can adjust various ocean parameters and they take effect immediately, in real time.
+만약 바이브 코딩이 대세가 된 지금 공부를 시작했다면 제대로 이해하지 않고 넘어갔을 부분들도 하나하나 자세히 공부하며 전진했죠.
+제가 한창 바다 렌더링에 도전하던 시기는 AI가 아직 세상을 완전히 집어삼키지 않은 낭만의 시기였으니까요. ㅠㅠ
 
-There are some flaws, thought.
-For instance, the water surface lighting is not correct at the moment.
-On top of that I still can't figure out how to correctly handle foam calculation.
-There are still some problems I need to solve.
+아무튼 저는 이 기술에 대해 심도 있게 공부를 했지만...
+다른 사람에게 쉽게 설명하지 못하면 제대로 이해한 것이 아니죠!
+저는 여러분께 이 바다 렌더링의 원리를 아주 알기 쉽게 설명해 드릴 계획입니다.
+그러니 자신감을 갖고 따라와 주세요.
 
-However, I've learned a lot in the process of implementing it, and I thought I'd share it.
-From Vulkan render pass management to compute shader, and mathematics.
+# 바다는 사인 함수의 합
 
-Before we start, please watch a YouTube video *Ocean waves simulation with Fast Fourier transform* by Jump Trajectory.
-This is the very video that inspired me to do it, and core concepts are elegantly explained and visualized in the video.
-Even if you are not a mathematical person, you would still enjoy it.
+최적화, 성능을 생각하지 않고 가장 단순하게 바다를 만드는 방법부터 생각해 볼까요?
+바닥에 N x N 개의 점을 생성한 다음 이것으로 면을 만들어 냅니다.
+그리고 각 점을 파도처럼 보이게끔 위아래로 움직여 주기만 하면 됩니다.
+참 쉽죠?
 
-<p><div style='position:relative; padding-bottom:calc(56.25% + 44px)'>
-    <iframe
-        scrolling='no'
-        width='100%'
-        height='100%'
-        style='position:absolute;top:0;left:0;'
-        src="https://www.youtube.com/embed/kGEqaX4Y4bQ"
-        title="YouTube video player"
-        frameborder="0"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-        allowfullscreen
-    ></iframe>
-</div></p>
+여기서 바닥을 이루는 수많은 점을 생성하는 기술이 바로 테셀레이션인데요.
+이것은 이번 포스트 범위는 벗어나므로 설명을 생략하겠습니다.
+그냥 바닥 점 개수가 엄청 많다고만 생각하셔도 무방합니다.
 
-Do you feel like digging in much deeper?
-Alright let's go!
+우리가 진짜로 집중해야 할 곳은 바로 파도처럼 보이게끔 점을 위아래로 움직이는 부분인데요.
+이것은 우리가 학교에서 배운 삼각함수만으로 쉽게 만들 수 있기는 합니다.
+제아무리 복잡한 파동이라도 사인 함수의 합으로 표현할 수 있잖아요?
+이 사인 함수의 크기, 진동수, 위치를 다르게 해서 수없이 더해주면 현실의 바다처럼 복잡한 파도가 만들어지기는 합니다.
 
-We'll learn how ocean surface generation was implemented.
-Ocean surface lighting, buoyancy are not covered here, at least for now because I'm still studying these.
+하지만 사인 함수의 개수가 많아질수록 컴퓨터의 부담이 커지겠죠?
+게다가 바닥을 이루는 점의 개수가 엄청나게 많기 때문에, 컴퓨터 연산량이 폭발적으로 증가할 수밖에 없습니다.
+위 영상에서 본 것처럼 복잡한 파도를 실시간으로 만들기 위해서는 다른 접근법이 필요합니다.
 
-# Ocean Spectrum
+# 푸리에 변환
 
-If you watched the video by Jump Trajectory, then you'd understand ocean wave can be described as a sum of many sine waves.
-It's actually true.
-Check out Acerola's first ocean renderer video where he actually used sum of sines to make ocean surface.
-But the problem with this technique is that it's inevitably slow.
+자, 푸리에라는 단어를 보자마자 뒤로가기 버튼에 손이 가는 당신...
+말리지는 않겠습니다.
+저도 문과생이고 학교에서 푸리에 변환을 배워본 적이 없는 입장에서 이것이 얼마나 위압적으로 보이는지는 잘 알고 있습니다.
+그러니 포기하시기 전에 이 영상 한번만 봐주세요.
 
-[Tessendorf's paper](https://people.computing.clemson.edu/~jtessen/reports/papers_files/coursenotes2004.pdf) demonstrates you can use Fourier transform to calculate ocean waves much faster.
-Ok, before we dive into this topic, please first watch Fourier transform series by 3Blue1Brown.
-This is my far the best explanation for it, and had I missed it I would never be able to truly understand the whole ocean rendering algorithm.
+[3B1B 푸리에 변환 영상]
 
-It's ok if you don't fully understand the computation of it.
-The importance concepts are *time domain* and *frequency domain*.
+사실 한번으론 부족할 수도 있어요. 두세 번 정도, 며칠 간격을 두고 계속 봐주세요.
+그러고 나서도 푸리에 변환에 대한 공포가 가시지 않는다면, 한 달 뒤에 다시 영상을 봐주세요.
+그래도 안 된다면 또 한 달 뒤에... 그러다보면 언젠가 감이 올 겁니다.
 
-# Fourier Transform
+이 문단에 당도하신 분이라면 이제 푸리에 변환이 대충 뭐에 쓰는 것인지는 이해하셨겠죠?
+사실 이 부분은 아무리 생각해도 3Blue1Brown보다 잘 설명할 자신이 없어서 외부 자료에 의존한 점 죄송하게 생각하고 있습니다.
+하지만 이 유튜브 채널은 저 같은 수포자도 다시 수학을 좋아하게 만들 정도로 훌륭한 컨텐츠로 가득하므로 관심있게 봐주세요.
 
-# Fast Fourier Transform on GPU
+아무튼! 푸리에 변환은 하나로 합쳐진 수많은 사인 함수를 각각 분해한 다음, 어떤 진동수의 사인함수의 영향력이 강한지를 그래프로 보여줍니다.
+그런데 우리의 목표는 뭐지요?
+수많은 사인 함수를 하나로 더하는 거잖아요?
+그렇기 때문에 우리는 역 푸리에 변환을 할 겁니다.
 
-# Tessellation
+이제 전문용어로는 Time domain과 Frequency domain이라고 하는데요.
+Time domain 그래프는 쉽게 말하면 파도의 형태라고 보면 됩니다.
+그러면 frequency domain은 파도에 푸리에 변환을 적용한 무언가겠죠?
+우리는 이 무언가가 뭔지 알아낸 다음 그 공식을 셰이더 코드에 박아놓기만 하면 됩니다!
+
+이 무언가는 ocean spectrum이라고 부릅니다.
+대표적으로는 Phillips spectrum이 있으며, 제가 사용한 것은 JONSWAP sepctrum입니다.
+이것은 진짜 바다에 나가서 몇 달 동안 파도를 연구하신 학자분들이 바다의 대략적인 성질을 공식으로 만들어 둔 것입니다.
+Spectrum에 역 푸리에 변환을 적용하면 정말 신기하게도 파도 모양이 만들어진답니다!
+
+# FFT
+
+[Tessendorf's paper](https://people.computing.clemson.edu/~jtessen/reports/papers_files/coursenotes2004.pdf)
